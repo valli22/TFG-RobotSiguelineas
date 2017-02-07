@@ -32,4 +32,5 @@ HEADERS  += mainwindow.h \
 
 FORMS    += mainwindow.ui
 
+LIBS += -lOpengl32
 LIBS += libfreeglut

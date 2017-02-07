@@ -17,7 +17,7 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -g -std=gnu++11 -frtti -Wall -W
 INCPATH       = -I../RobotSiguelineas -I. -I../../../../Qt/5.7/mingw53_32/include -I../../../../Qt/5.7/mingw53_32/include/QtOpenGL -I../../../../Qt/5.7/mingw53_32/include/QtWidgets -I../../../../Qt/5.7/mingw53_32/include/QtGui -I../../../../Qt/5.7/mingw53_32/include/QtANGLE -I../../../../Qt/5.7/mingw53_32/include/QtCore -Idebug -I. -I../../../../Qt/5.7/mingw53_32/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LF:/Qt/5.7/mingw53_32/lib F:/Qt/5.7/mingw53_32/lib/libqtmaind.a -lshell32 F:/Qt/5.7/mingw53_32/lib/libQt5Cored.a -LC:/utils/my_sql/my_sql/lib -LC:/utils/postgresql/pgsql/lib -lglut F:/Qt/5.7/mingw53_32/lib/libQt5OpenGLd.a F:/Qt/5.7/mingw53_32/lib/libQt5Widgetsd.a F:/Qt/5.7/mingw53_32/lib/libQt5Guid.a F:/Qt/5.7/mingw53_32/lib/libQt5Cored.a 
+LIBS        =        -lmingw32 -LF:/Qt/5.7/mingw53_32/lib F:/Qt/5.7/mingw53_32/lib/libqtmaind.a -lshell32 F:/Qt/5.7/mingw53_32/lib/libQt5Cored.a -LC:/utils/my_sql/my_sql/lib -LC:/utils/postgresql/pgsql/lib -lOpengl32 -lfreeglut F:/Qt/5.7/mingw53_32/lib/libQt5OpenGLd.a F:/Qt/5.7/mingw53_32/lib/libQt5Widgetsd.a F:/Qt/5.7/mingw53_32/lib/libQt5Guid.a F:/Qt/5.7/mingw53_32/lib/libQt5Cored.a 
 QMAKE         = F:/Qt/5.7/mingw53_32/bin/qmake.exe
 IDC           = idc
 IDL           = midl
@@ -558,7 +558,10 @@ debug/main.o: ../RobotSiguelineas/main.cpp ../RobotSiguelineas/mainwindow.h \
 		../../../../Qt/5.7/mingw53_32/include/QtCore/qeventloop.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_std.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_ext.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/main.o ../RobotSiguelineas/main.cpp
 
 debug/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mainwindow.h \

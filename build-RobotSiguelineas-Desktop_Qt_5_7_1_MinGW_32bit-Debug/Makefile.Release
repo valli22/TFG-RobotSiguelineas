@@ -17,7 +17,7 @@ CXXFLAGS      = -pipe -fno-keep-inline-dllexport -O2 -std=gnu++11 -frtti -Wall -
 INCPATH       = -I../RobotSiguelineas -I. -I../../../../Qt/5.7/mingw53_32/include -I../../../../Qt/5.7/mingw53_32/include/QtOpenGL -I../../../../Qt/5.7/mingw53_32/include/QtWidgets -I../../../../Qt/5.7/mingw53_32/include/QtGui -I../../../../Qt/5.7/mingw53_32/include/QtANGLE -I../../../../Qt/5.7/mingw53_32/include/QtCore -Irelease -I. -I../../../../Qt/5.7/mingw53_32/mkspecs/win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        -lmingw32 -LF:/Qt/5.7/mingw53_32/lib F:/Qt/5.7/mingw53_32/lib/libqtmain.a -lshell32 F:/Qt/5.7/mingw53_32/lib/libQt5Core.a -LC:/utils/my_sql/my_sql/lib -LC:/utils/postgresql/pgsql/lib -lglut F:/Qt/5.7/mingw53_32/lib/libQt5OpenGL.a F:/Qt/5.7/mingw53_32/lib/libQt5Widgets.a F:/Qt/5.7/mingw53_32/lib/libQt5Gui.a F:/Qt/5.7/mingw53_32/lib/libQt5Core.a 
+LIBS        =        -lmingw32 -LF:/Qt/5.7/mingw53_32/lib F:/Qt/5.7/mingw53_32/lib/libqtmain.a -lshell32 F:/Qt/5.7/mingw53_32/lib/libQt5Core.a -LC:/utils/my_sql/my_sql/lib -LC:/utils/postgresql/pgsql/lib -lOpengl32 -lfreeglut F:/Qt/5.7/mingw53_32/lib/libQt5OpenGL.a F:/Qt/5.7/mingw53_32/lib/libQt5Widgets.a F:/Qt/5.7/mingw53_32/lib/libQt5Gui.a F:/Qt/5.7/mingw53_32/lib/libQt5Core.a 
 QMAKE         = F:/Qt/5.7/mingw53_32/bin/qmake.exe
 IDC           = idc
 IDL           = midl
@@ -558,7 +558,10 @@ release/main.o: ../RobotSiguelineas/main.cpp ../RobotSiguelineas/mainwindow.h \
 		../../../../Qt/5.7/mingw53_32/include/QtCore/qeventloop.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qdesktopwidget.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qguiapplication.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_std.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_ext.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/main.o ../RobotSiguelineas/main.cpp
 
 release/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mainwindow.h \
