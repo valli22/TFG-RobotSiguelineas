@@ -12,8 +12,7 @@ public:
     void initializeGL();
     void paintGL();
     void resizeGL(int w, int h);
-
-
+    void perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
 };
 
 #endif // GLWIDGET_H

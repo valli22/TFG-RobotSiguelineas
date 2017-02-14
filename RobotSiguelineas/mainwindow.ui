@@ -31,6 +31,19 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
+       <widget class="QSpinBox" name="parameter1"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Insert Parameters</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="test"/>
+      </item>
+      <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -73,8 +86,8 @@
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>641</x>
-     <y>485</y>
+     <x>694</x>
+     <y>509</y>
     </hint>
     <hint type="destinationlabel">
      <x>662</x>

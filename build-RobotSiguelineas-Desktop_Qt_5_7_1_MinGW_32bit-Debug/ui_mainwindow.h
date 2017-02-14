@@ -15,9 +15,11 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "glwidget.h"
@@ -31,6 +33,9 @@ public:
     QHBoxLayout *horizontalLayout;
     GLWidget *widget;
     QVBoxLayout *verticalLayout;
+    QSpinBox *parameter1;
+    QPushButton *pushButton_2;
+    QLineEdit *test;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
 
@@ -59,6 +64,21 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        parameter1 = new QSpinBox(centralWidget);
+        parameter1->setObjectName(QStringLiteral("parameter1"));
+
+        verticalLayout->addWidget(parameter1);
+
+        pushButton_2 = new QPushButton(centralWidget);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        verticalLayout->addWidget(pushButton_2);
+
+        test = new QLineEdit(centralWidget);
+        test->setObjectName(QStringLiteral("test"));
+
+        verticalLayout->addWidget(test);
+
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
@@ -82,6 +102,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Robot Siguelineas", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi
 

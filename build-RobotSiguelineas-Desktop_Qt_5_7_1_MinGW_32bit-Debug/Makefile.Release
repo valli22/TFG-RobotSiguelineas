@@ -315,6 +315,9 @@ release/moc_glwidget.cpp: ../../../../Qt/5.7/mingw53_32/include/QtWidgets/QOpenG
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QTimer \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qtimer.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qbasictimer.h \
 		../RobotSiguelineas/glwidget.h \
 		../../../../Qt/5.7/mingw53_32/bin/moc.exe
 	'F:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IF:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -IF:/TFG/Git/TFG-RobotSiguelineas/RobotSiguelineas -IF:/Qt/5.7/mingw53_32/include -IF:/Qt/5.7/mingw53_32/include/QtOpenGL -IF:/Qt/5.7/mingw53_32/include/QtWidgets -IF:/Qt/5.7/mingw53_32/include/QtGui -IF:/Qt/5.7/mingw53_32/include/QtANGLE -IF:/Qt/5.7/mingw53_32/include/QtCore -I. -IF:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IF:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ../RobotSiguelineas/glwidget.h -o release/moc_glwidget.cpp
@@ -436,7 +439,10 @@ ui_mainwindow.h: ../RobotSiguelineas/mainwindow.ui \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2.h \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QTimer \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qtimer.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qbasictimer.h
 	'F:\Qt\5.7\mingw53_32\bin\uic.exe' ../RobotSiguelineas/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -720,7 +726,10 @@ release/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mai
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2.h \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QTimer \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qtimer.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/mainwindow.o ../RobotSiguelineas/mainwindow.cpp
 
 release/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidget.h \
@@ -833,7 +842,13 @@ release/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidge
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2.h \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QTimer \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qtimer.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qbasictimer.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_std.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_ext.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release/glwidget.o ../RobotSiguelineas/glwidget.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
