@@ -1,5 +1,7 @@
 #include "glwidget.h"
 #include "GL/freeglut.h"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
@@ -29,7 +31,7 @@ void GLWidget::resizeGL(int w, int h){
 
     glMatrixMode(GL_PROJECTION);
 
-    /*glLoadIdentity();
+    glLoadIdentity();
 
     GLdouble aspect = w / h;
     const GLdouble zNear = 1.0;
@@ -39,30 +41,27 @@ void GLWidget::resizeGL(int w, int h){
     perspective(fov,aspect,zNear,zFar);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();*/
-    //gluLookAt(0,0,5, 0,0,0, 0,1,0);
+    glLoadIdentity();
+
+    glm::vec3 cameraPos = glm::vec3(0.0f,0.0f,5.0f);
+    glm::vec3 cameraDir = glm::vec3(0.0f,0.0f,0.0f);
+    glm::vec3 up = glm::vec3(0.0f,1.0f,0.0f);
+
+    glm::mat4 view = glm::lookAt(cameraPos,cameraDir,up);
+
+    const float *viewM = (const float*)glm::value_ptr(view);
+
+    glLoadMatrixf(viewM);
 }
 
-/*void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
+void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
 {
     GLdouble xmin, xmax, ymin, ymax;
 
     ymax = zNear * tan( fovy * M_PI / 360.0 );
     ymin = -ymax;
     xmin = ymin * aspect;
-    xmax = ymax * aspect;
+    xmax = -xmin;
 
     glFrustum( xmin, xmax, ymin, ymax, zNear, zFar );
-}*/
-
-/*void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar){
-    GLdouble top, bottom, left, right;
-    top = zNear * tan(M_PI*fovy/2);
-    bottom = -top;
-    right = aspect*top;
-    left = -right;
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glFrustum(left, right, bottom, top, zNear, zFar);
-    glMatrixMode(GL_MODELVIEW);
-}*/
+}
