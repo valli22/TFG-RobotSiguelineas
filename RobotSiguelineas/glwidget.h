@@ -13,6 +13,13 @@ public:
     void paintGL();
     void resizeGL(int w, int h);
     void perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
+
+private:
+    GLfloat tx;
+    GLfloat ty;
+    GLfloat tz;
+
+    void keyPressEvent(QKeyEvent *event);
 };
 
 #endif // GLWIDGET_H

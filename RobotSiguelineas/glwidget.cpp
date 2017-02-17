@@ -2,10 +2,15 @@
 #include "GL/freeglut.h"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "QKeyEvent"
+#include "QTextStream"
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
 {
+    tx = 0.0f; //movimiento horizontal ( tx++ -> derecha, tx-- -> izquierda)
+    ty = 0.0f; //movimiento vertical ( ty++ -> arriba, ty-- -> abajo)
+    tz = 0.0f; //movimiento hacia la camara ( tz++ -> hacia dentro, tz-- -> hacia fuera)
 }
 
 void GLWidget::initializeGL(){
@@ -19,10 +24,11 @@ void GLWidget::initializeGL(){
 void GLWidget::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glRotatef(0.5,1,1,1);
+    //glRotatef(0.5,1,1,1);
     glColor3f(1,0.6,0);
-    //glTranslatef(-0.5,0,0);
-    glutWireTeapot(0.6);
+    //glutWireTeapot(0.6);
+    glTranslatef(tx,ty,tz);
+    glutSolidCube(0.5);
     update();
 }
 
@@ -64,4 +70,29 @@ void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdou
     xmax = -xmin;
 
     glFrustum( xmin, xmax, ymin, ymax, zNear, zFar );
+}
+
+void GLWidget::keyPressEvent(QKeyEvent *event)
+{
+    QTextStream out(stdout);
+    switch (event->key()) {
+    case Qt::Key_W:
+        out << QString("Some text");
+        ty+=0.1;
+        break;
+    case Qt::Key_S:
+        out << QString("Some text");
+        ty-=0.1;
+        break;
+    case Qt::Key_A:
+        out << QString("Some text");
+        tx-=0.1;
+        break;
+    case Qt::Key_D:
+        out << QString("Some text");
+        tx+=0.1;
+        break;
+    default:
+        break;
+    }
 }
