@@ -15,9 +15,8 @@ public:
     void perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
 
 private:
-    GLfloat tx;
-    GLfloat ty;
-    GLfloat tz;
+    GLfloat rotationValue;
+    GLfloat movementValue;
 
     void keyPressEvent(QKeyEvent *event);
 };

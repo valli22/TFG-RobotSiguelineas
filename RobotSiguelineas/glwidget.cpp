@@ -8,9 +8,9 @@
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
 {
-    tx = 0.0f; //movimiento horizontal ( tx++ -> derecha, tx-- -> izquierda)
-    ty = 0.0f; //movimiento vertical ( ty++ -> arriba, ty-- -> abajo)
-    tz = 0.0f; //movimiento hacia la camara ( tz++ -> hacia dentro, tz-- -> hacia fuera)
+    rotationValue = 0.0f; //fuerza de la rotacion
+    movementValue = 0.0f; //velocidad de movimiento
+    setFocusPolicy(Qt::StrongFocus);
 }
 
 void GLWidget::initializeGL(){
@@ -24,10 +24,10 @@ void GLWidget::initializeGL(){
 void GLWidget::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //glRotatef(0.5,1,1,1);
+    glRotatef(rotationValue,0,0,1);
     glColor3f(1,0.6,0);
     //glutWireTeapot(0.6);
-    glTranslatef(tx,ty,tz);
+    glTranslatef(0,movementValue,0);
     glutSolidCube(0.5);
     update();
 }
@@ -74,25 +74,21 @@ void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdou
 
 void GLWidget::keyPressEvent(QKeyEvent *event)
 {
-    QTextStream out(stdout);
     switch (event->key()) {
     case Qt::Key_W:
-        out << QString("Some text");
-        ty+=0.1;
+        movementValue=0.01;
         break;
     case Qt::Key_S:
-        out << QString("Some text");
-        ty-=0.1;
+        movementValue=-0.01;
         break;
     case Qt::Key_A:
-        out << QString("Some text");
-        tx-=0.1;
+        rotationValue=1;
         break;
     case Qt::Key_D:
-        out << QString("Some text");
-        tx+=0.1;
+        rotationValue=-1;
         break;
     default:
+        rotationValue = 0;
         break;
     }
 }
