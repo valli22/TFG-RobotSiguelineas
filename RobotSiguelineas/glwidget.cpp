@@ -4,12 +4,26 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "QKeyEvent"
 #include "QTextStream"
+#include <qmath.h>
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
 {
-    rotationValue = 0.0f; //fuerza de la rotacion
-    movementValue = 0.0f; //velocidad de movimiento
+
+    //Inicio del robot en origen de coordenadas con rotacion 0
+    xPosBefore = 0.0f;
+    yPosBefore = 0.0f;
+    rotPosBefore = 0.0f;
+
+    //Velocidad inicial de las ruedas
+    leftWheel = 0.1f;
+    rightWheel = 0.1f;
+
+    wheelRadius = 1.0f;
+    wheelSeparation = 0.01f;
+
+    dt = 0.05f;
+
     setFocusPolicy(Qt::StrongFocus);
 }
 
@@ -24,10 +38,13 @@ void GLWidget::initializeGL(){
 void GLWidget::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glRotatef(rotationValue,0,0,1);
-    glColor3f(1,0.6,0);
-    //glutWireTeapot(0.6);
-    glTranslatef(0,movementValue,0);
+    GLfloat x = xPosBefore - (rightWheel + leftWheel) * (wheelRadius * qSin(rotPosBefore))/2 * dt;
+    GLfloat y = yPosBefore + (rightWheel + leftWheel) * (wheelRadius * qCos(rotPosBefore))/2 * dt;
+    GLfloat rot = rotPosBefore + (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
+
+    glRotatef(rot,0.0f,0.0f,1.0f);
+    glTranslatef(x,y,0.0);
+
     glutSolidCube(0.5);
     update();
 }
@@ -75,20 +92,15 @@ void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdou
 void GLWidget::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
-    case Qt::Key_W:
-        movementValue=0.01;
-        break;
-    case Qt::Key_S:
-        movementValue=-0.01;
-        break;
     case Qt::Key_A:
-        rotationValue=1;
+        leftWheel = 0.0f;
         break;
     case Qt::Key_D:
-        rotationValue=-1;
+        rightWheel = 0.0f;
         break;
     default:
-        rotationValue = 0;
+        rightWheel = 0.1f;
+        leftWheel = 0.1f;
         break;
     }
 }

@@ -15,8 +15,26 @@ public:
     void perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
 
 private:
-    GLfloat rotationValue;
-    GLfloat movementValue;
+
+    //Posicion en X del robot en el instante anterior (t-1)
+    GLfloat xPosBefore;
+    //Posicion en Y del robot en el instante anterior (t-1)
+    GLfloat yPosBefore;
+    //Angulo que tenia el robot en el instante anterior (t-1)
+    GLfloat rotPosBefore;
+
+    //Velocidad rueda izquierda
+    GLfloat leftWheel;
+    //Velocidad rueda derecha
+    GLfloat rightWheel;
+
+    //Radio de las ruedas
+    GLfloat wheelRadius;
+    //Distancia entre las dos ruedas
+    GLfloat wheelSeparation;
+
+    //Tiempo que transcurre entre dos instantes
+    GLfloat dt;
 
     void keyPressEvent(QKeyEvent *event);
 };
