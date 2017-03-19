@@ -37,6 +37,7 @@ private:
     GLfloat dt;
 
     void keyPressEvent(QKeyEvent *event);
+    void drawCircuite();
 };
 
 #endif // GLWIDGET_H
