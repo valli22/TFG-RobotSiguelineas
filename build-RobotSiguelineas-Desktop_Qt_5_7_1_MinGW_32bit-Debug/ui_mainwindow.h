@@ -13,13 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include "glwidget.h"
@@ -33,9 +33,17 @@ public:
     QHBoxLayout *horizontalLayout;
     GLWidget *widget;
     QVBoxLayout *verticalLayout;
-    QSpinBox *parameter1;
+    QLabel *wheelSpeedLabel;
+    QDoubleSpinBox *wheelSpeed;
+    QLabel *wheelRadiusLabel;
+    QDoubleSpinBox *wheelRadius;
+    QLabel *wheelSeparationLabel;
+    QDoubleSpinBox *wheelSeparation;
+    QLabel *sensorSeparationLabel;
+    QDoubleSpinBox *sensorSeparation;
+    QLabel *robotRadiusLabel;
+    QDoubleSpinBox *robotRadius;
     QPushButton *pushButton_2;
-    QLineEdit *test;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
 
@@ -64,20 +72,60 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        parameter1 = new QSpinBox(centralWidget);
-        parameter1->setObjectName(QStringLiteral("parameter1"));
+        wheelSpeedLabel = new QLabel(centralWidget);
+        wheelSpeedLabel->setObjectName(QStringLiteral("wheelSpeedLabel"));
 
-        verticalLayout->addWidget(parameter1);
+        verticalLayout->addWidget(wheelSpeedLabel);
+
+        wheelSpeed = new QDoubleSpinBox(centralWidget);
+        wheelSpeed->setObjectName(QStringLiteral("wheelSpeed"));
+
+        verticalLayout->addWidget(wheelSpeed);
+
+        wheelRadiusLabel = new QLabel(centralWidget);
+        wheelRadiusLabel->setObjectName(QStringLiteral("wheelRadiusLabel"));
+
+        verticalLayout->addWidget(wheelRadiusLabel);
+
+        wheelRadius = new QDoubleSpinBox(centralWidget);
+        wheelRadius->setObjectName(QStringLiteral("wheelRadius"));
+
+        verticalLayout->addWidget(wheelRadius);
+
+        wheelSeparationLabel = new QLabel(centralWidget);
+        wheelSeparationLabel->setObjectName(QStringLiteral("wheelSeparationLabel"));
+
+        verticalLayout->addWidget(wheelSeparationLabel);
+
+        wheelSeparation = new QDoubleSpinBox(centralWidget);
+        wheelSeparation->setObjectName(QStringLiteral("wheelSeparation"));
+
+        verticalLayout->addWidget(wheelSeparation);
+
+        sensorSeparationLabel = new QLabel(centralWidget);
+        sensorSeparationLabel->setObjectName(QStringLiteral("sensorSeparationLabel"));
+
+        verticalLayout->addWidget(sensorSeparationLabel);
+
+        sensorSeparation = new QDoubleSpinBox(centralWidget);
+        sensorSeparation->setObjectName(QStringLiteral("sensorSeparation"));
+
+        verticalLayout->addWidget(sensorSeparation);
+
+        robotRadiusLabel = new QLabel(centralWidget);
+        robotRadiusLabel->setObjectName(QStringLiteral("robotRadiusLabel"));
+
+        verticalLayout->addWidget(robotRadiusLabel);
+
+        robotRadius = new QDoubleSpinBox(centralWidget);
+        robotRadius->setObjectName(QStringLiteral("robotRadius"));
+
+        verticalLayout->addWidget(robotRadius);
 
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
         verticalLayout->addWidget(pushButton_2);
-
-        test = new QLineEdit(centralWidget);
-        test->setObjectName(QStringLiteral("test"));
-
-        verticalLayout->addWidget(test);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -102,6 +150,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Robot Siguelineas", Q_NULLPTR));
+        wheelSpeedLabel->setText(QApplication::translate("MainWindow", "Wheel speed", Q_NULLPTR));
+        wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius", Q_NULLPTR));
+        wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
+        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
+        robotRadiusLabel->setText(QApplication::translate("MainWindow", "Robot radius", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi

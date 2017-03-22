@@ -15,8 +15,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    int value;
-    value = ui->parameter1->value();
-    QString s = QString::number(value);
-    ui->test->setText(s);
+    GLdouble wheelSpeed, wheelRadius, wheelSeparation, sensorSeparation, robotRadius;
+
+    wheelSpeed = ui->wheelSpeed->value();
+    wheelRadius = ui->wheelRadius->value();
+    wheelSeparation = ui->wheelSeparation->value();
+    sensorSeparation = ui->sensorSeparation->value();
+    robotRadius = ui->robotRadius->value();
+
+    ui->widget->setWheelSpeed(wheelSpeed);
+    ui->widget->setWheelRadius(wheelRadius);
+    ui->widget->setWheelSeparation(wheelSeparation);
+    ui->widget->setSensorSeparation(sensorSeparation);
+    ui->widget->setRobotRadius(robotRadius);
 }

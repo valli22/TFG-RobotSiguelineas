@@ -31,7 +31,54 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QSpinBox" name="parameter1"/>
+       <widget class="QLabel" name="wheelSpeedLabel">
+        <property name="text">
+         <string>Wheel speed</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="wheelSpeed"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="wheelRadiusLabel">
+        <property name="text">
+         <string>Wheel radius</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="wheelRadius"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="wheelSeparationLabel">
+        <property name="text">
+         <string>Wheel separation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="wheelSeparation"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="sensorSeparationLabel">
+        <property name="text">
+         <string>Sensor separation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="sensorSeparation"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="robotRadiusLabel">
+        <property name="text">
+         <string>Robot radius</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QDoubleSpinBox" name="robotRadius"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_2">
@@ -39,9 +86,6 @@
          <string>Insert Parameters</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="test"/>
       </item>
       <item>
        <spacer name="verticalSpacer">

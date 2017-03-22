@@ -13,6 +13,11 @@ public:
     void paintGL();
     void resizeGL(int w, int h);
     void perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
+    void setWheelSpeed(GLdouble speed);
+    void setWheelRadius(GLdouble radius);
+    void setWheelSeparation(GLdouble separation);
+    void setSensorSeparation(GLdouble separation);
+    void setRobotRadius(GLdouble radius);
 
 private:
 
@@ -36,8 +41,15 @@ private:
     //Tiempo que transcurre entre dos instantes
     GLfloat dt;
 
+    //Distancia entre sensores
+    GLfloat sensorSeparation;
+
+    //Radio del robot
+    GLfloat robotRadius;
+
     void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
+    void drawRobot();
 };
 
 #endif // GLWIDGET_H
