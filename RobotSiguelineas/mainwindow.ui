@@ -71,14 +71,14 @@
        <widget class="QDoubleSpinBox" name="sensorSeparation"/>
       </item>
       <item>
-       <widget class="QLabel" name="robotRadiusLabel">
+       <widget class="QLabel" name="robotDiameterLabel">
         <property name="text">
-         <string>Robot radius</string>
+         <string>Robot diameter</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="robotRadius"/>
+       <widget class="QDoubleSpinBox" name="robotDiameter"/>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_2">

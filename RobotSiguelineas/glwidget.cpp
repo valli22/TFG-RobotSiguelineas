@@ -11,9 +11,9 @@ GLWidget::GLWidget(QWidget *parent):
 {
 
     //Inicio del robot en origen de coordenadas con rotacion 0
-    xPosBefore = 0.0f;
-    yPosBefore = 0.0f;
-    rotPosBefore = 0.0f;
+    x = 0.0f;
+    z = 5.0f;
+    rot = 0.0f;
 
     //Velocidad inicial de las ruedas
     leftWheel = 0.0f;
@@ -25,7 +25,7 @@ GLWidget::GLWidget(QWidget *parent):
     dt = 0.05f;
 
     sensorSeparation = 0.5f;
-    robotRadius = 0.5f;
+    robotDiameter = 0.5f;
 
     setFocusPolicy(Qt::StrongFocus);
 }
@@ -44,9 +44,9 @@ void GLWidget::paintGL(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glm::vec3 cameraPos = glm::vec3(0.0f,0.0f,-5.0f);
-    glm::vec3 cameraDir = glm::vec3(0.0f,0.0f,0.0f);
-    glm::vec3 up = glm::vec3(0.0f,1.0f,0.0f);
+    glm::vec3 cameraPos = glm::vec3(0.0f,5.0f,5.0f);
+    glm::vec3 cameraDir = glm::vec3(0.0f,0.0f,5.0f);
+    glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
 
     glm::mat4 view = glm::lookAt(cameraPos,cameraDir,up);
 
@@ -56,19 +56,20 @@ void GLWidget::paintGL(){
 
     drawCircuite();
 
-    GLfloat x = xPosBefore - (rightWheel + leftWheel) * ((wheelRadius * qSin(rotPosBefore))/2) * dt;
-    GLfloat y = yPosBefore + (rightWheel + leftWheel) * ((wheelRadius * qCos(rotPosBefore))/2) * dt;
-    GLfloat rot = rotPosBefore + (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
+    x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
+    z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
+    rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
 
-    xPosBefore = x;
-    yPosBefore = y;
-    rotPosBefore = rot;
     glPushMatrix();
-        glTranslatef(x,y,0.0f);
-        glRotatef(rot,0.0f,0.0f,1.0f);
+        glTranslatef(x,0.0f,z);
+        glRotatef(rot,0.0f,1.0f,0.0f);
 
         drawRobot();
     glPopMatrix();
+
+    rightWheel = 0.1f;
+    leftWheel = 0.1f;
+
     update();
 }
 
@@ -104,14 +105,10 @@ void GLWidget::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_A:
-        rightWheel = 0.0f;
-        break;
-    case Qt::Key_D:
         leftWheel = 0.0f;
         break;
-    default:
-        rightWheel = 0.1f;
-        leftWheel = 0.1f;
+    case Qt::Key_D:
+        rightWheel = 0.0f;
         break;
     }
 }
@@ -132,17 +129,17 @@ void GLWidget::drawRobot(){
     GLfloat distanceToTheCenter = sensorSeparation / 2.0f;
     //Sensor derecho
     glPushMatrix();
-        glTranslatef(distanceToTheCenter,robotRadius/2.0f,0);
+        glTranslatef(distanceToTheCenter,0,-robotDiameter/2.0f);
         glutSolidCube(0.1);
     glPopMatrix();
 
     //Sensor izquierdo
     glPushMatrix();
-        glTranslatef(-distanceToTheCenter,robotRadius/2.0f,0);
+        glTranslatef(-distanceToTheCenter,0,-robotDiameter/2.0f);
         glutSolidCube(0.1);
     glPopMatrix();
 
-    glutSolidCube(robotRadius);
+    glutSolidCube(robotDiameter);
 }
 
 void GLWidget::setWheelSpeed(GLdouble speed){
@@ -162,8 +159,8 @@ void GLWidget::setSensorSeparation(GLdouble separation){
     sensorSeparation = separation;
 }
 
-void GLWidget::setRobotRadius(GLdouble radius){
-    robotRadius = radius;
+void GLWidget::setRobotDiameter(GLdouble diameter){
+    robotDiameter = diameter;
 }
 
 /*void GLWidget::drawCircuite()

@@ -41,8 +41,8 @@ public:
     QDoubleSpinBox *wheelSeparation;
     QLabel *sensorSeparationLabel;
     QDoubleSpinBox *sensorSeparation;
-    QLabel *robotRadiusLabel;
-    QDoubleSpinBox *robotRadius;
+    QLabel *robotDiameterLabel;
+    QDoubleSpinBox *robotDiameter;
     QPushButton *pushButton_2;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
@@ -112,15 +112,15 @@ public:
 
         verticalLayout->addWidget(sensorSeparation);
 
-        robotRadiusLabel = new QLabel(centralWidget);
-        robotRadiusLabel->setObjectName(QStringLiteral("robotRadiusLabel"));
+        robotDiameterLabel = new QLabel(centralWidget);
+        robotDiameterLabel->setObjectName(QStringLiteral("robotDiameterLabel"));
 
-        verticalLayout->addWidget(robotRadiusLabel);
+        verticalLayout->addWidget(robotDiameterLabel);
 
-        robotRadius = new QDoubleSpinBox(centralWidget);
-        robotRadius->setObjectName(QStringLiteral("robotRadius"));
+        robotDiameter = new QDoubleSpinBox(centralWidget);
+        robotDiameter->setObjectName(QStringLiteral("robotDiameter"));
 
-        verticalLayout->addWidget(robotRadius);
+        verticalLayout->addWidget(robotDiameter);
 
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
@@ -154,7 +154,7 @@ public:
         wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius", Q_NULLPTR));
         wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
         sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
-        robotRadiusLabel->setText(QApplication::translate("MainWindow", "Robot radius", Q_NULLPTR));
+        robotDiameterLabel->setText(QApplication::translate("MainWindow", "Robot diameter", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi

@@ -17,16 +17,16 @@ public:
     void setWheelRadius(GLdouble radius);
     void setWheelSeparation(GLdouble separation);
     void setSensorSeparation(GLdouble separation);
-    void setRobotRadius(GLdouble radius);
+    void setRobotDiameter(GLdouble diameter);
 
 private:
 
     //Posicion en X del robot en el instante anterior (t-1)
-    GLfloat xPosBefore;
-    //Posicion en Y del robot en el instante anterior (t-1)
-    GLfloat yPosBefore;
+    GLfloat x;
+    //Posicion en Z del robot en el instante anterior (t-1)
+    GLfloat z;
     //Angulo que tenia el robot en el instante anterior (t-1)
-    GLfloat rotPosBefore;
+    GLfloat rot;
 
     //Velocidad rueda izquierda
     GLfloat leftWheel;
@@ -44,8 +44,8 @@ private:
     //Distancia entre sensores
     GLfloat sensorSeparation;
 
-    //Radio del robot
-    GLfloat robotRadius;
+    //Diamentro del robot
+    GLfloat robotDiameter;
 
     void keyPressEvent(QKeyEvent *event);
     void drawCircuite();

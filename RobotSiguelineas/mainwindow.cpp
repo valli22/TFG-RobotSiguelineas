@@ -15,17 +15,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    GLdouble wheelSpeed, wheelRadius, wheelSeparation, sensorSeparation, robotRadius;
+    GLdouble wheelSpeed, wheelRadius, wheelSeparation, sensorSeparation, robotDiameter;
 
     wheelSpeed = ui->wheelSpeed->value();
     wheelRadius = ui->wheelRadius->value();
     wheelSeparation = ui->wheelSeparation->value();
     sensorSeparation = ui->sensorSeparation->value();
-    robotRadius = ui->robotRadius->value();
+    robotDiameter = ui->robotDiameter->value();
 
     ui->widget->setWheelSpeed(wheelSpeed);
     ui->widget->setWheelRadius(wheelRadius);
     ui->widget->setWheelSeparation(wheelSeparation);
     ui->widget->setSensorSeparation(sensorSeparation);
-    ui->widget->setRobotRadius(robotRadius);
+    ui->widget->setRobotDiameter(robotDiameter);
 }
