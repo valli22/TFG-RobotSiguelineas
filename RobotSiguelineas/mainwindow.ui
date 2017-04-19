@@ -81,6 +81,23 @@
        <widget class="QDoubleSpinBox" name="robotDiameter"/>
       </item>
       <item>
+       <widget class="QLabel" name="circuitePathLabel">
+        <property name="text">
+         <string>Circuite path</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="circuitePath">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QPushButton" name="pushButton_2">
         <property name="text">
          <string>Insert Parameters</string>

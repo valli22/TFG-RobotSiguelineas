@@ -18,6 +18,8 @@ public:
     void setWheelSeparation(GLdouble separation);
     void setSensorSeparation(GLdouble separation);
     void setRobotDiameter(GLdouble diameter);
+    void setCircuite(QString circuite);
+    void startRace();
 
 private:
 
@@ -47,9 +49,28 @@ private:
     //Diamentro del robot
     GLfloat robotDiameter;
 
+    //Posiciones de los sensores en cada momento
+    GLfloat leftSensorX;
+    GLfloat rightSensorX;
+    GLfloat sensorZ;
+
+    //Path del archivo del circuito
+    QString path;
+
+    bool start;
+
+    QList< QList<float> > circuite;
+
+    //Umbral de cercania de los sensores a las lineas del circuito
+    GLfloat threshold;
+
+    //Velocidad de las ruedas
+    GLfloat wheelSpeed;
+
     void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
     void drawRobot();
+    void movementController();
 };
 
 #endif // GLWIDGET_H

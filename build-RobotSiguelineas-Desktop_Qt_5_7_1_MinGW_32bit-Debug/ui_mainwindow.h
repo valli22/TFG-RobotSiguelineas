@@ -18,6 +18,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
@@ -43,6 +44,8 @@ public:
     QDoubleSpinBox *sensorSeparation;
     QLabel *robotDiameterLabel;
     QDoubleSpinBox *robotDiameter;
+    QLabel *circuitePathLabel;
+    QPlainTextEdit *circuitePath;
     QPushButton *pushButton_2;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
@@ -122,6 +125,21 @@ public:
 
         verticalLayout->addWidget(robotDiameter);
 
+        circuitePathLabel = new QLabel(centralWidget);
+        circuitePathLabel->setObjectName(QStringLiteral("circuitePathLabel"));
+
+        verticalLayout->addWidget(circuitePathLabel);
+
+        circuitePath = new QPlainTextEdit(centralWidget);
+        circuitePath->setObjectName(QStringLiteral("circuitePath"));
+        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(1);
+        sizePolicy1.setHeightForWidth(circuitePath->sizePolicy().hasHeightForWidth());
+        circuitePath->setSizePolicy(sizePolicy1);
+
+        verticalLayout->addWidget(circuitePath);
+
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
@@ -155,6 +173,7 @@ public:
         wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
         sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
         robotDiameterLabel->setText(QApplication::translate("MainWindow", "Robot diameter", Q_NULLPTR));
+        circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi
