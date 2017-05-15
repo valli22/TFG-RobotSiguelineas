@@ -67,6 +67,9 @@ private:
     //Velocidad de las ruedas
     GLfloat wheelSpeed;
 
+    //Punto del circuito que indica en la recta en la que se encuentra
+    int i;
+
     //void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
     void drawRobot();

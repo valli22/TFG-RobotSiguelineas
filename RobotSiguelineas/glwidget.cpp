@@ -25,6 +25,8 @@ GLWidget::GLWidget(QWidget *parent):
 
     threshold = 0.1;
 
+    i=0;
+
     /*
 
     //Velocidad inicial de las ruedas
@@ -189,7 +191,6 @@ void GLWidget::movementController(){
         por lo tanto segun la primera formula --> n = -m*x1 + z1
         finalmente la formula quedara como .. z = m*x +n || z - m*x - n = 0
     */
-    for(int i = 0;i<circuite.length()-1;i++){
         float m = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0));
         float n = -m*circuite.at(i).at(0) + circuite.at(i).at(2);
         float moveSensorZ = z-(robotDiameter/2);
@@ -204,20 +205,39 @@ void GLWidget::movementController(){
         */
 
         if(moveSensorZ - m*moveLeftSensorX - n >= -threshold && moveSensorZ - m*moveLeftSensorX - n <= threshold){
-            if(qMin(circuite.at(i).at(0),circuite.at(i+1).at(0))-threshold<=moveLeftSensorX && qMax(circuite.at(i).at(0),circuite.at(i+1).at(0))+threshold>=moveLeftSensorX){
-                if(qMin(circuite.at(i).at(2),circuite.at(i+1).at(2))-threshold<=moveSensorZ && qMax(circuite.at(i).at(2),circuite.at(i+1).at(2))+threshold>=moveSensorZ){
-                    leftWheel=0.0;
-                }
-            }
+           leftWheel=0.0;
         }
         if(moveSensorZ - m*moveRightSensorX - n >= -threshold && moveSensorZ - m*moveRightSensorX - n <= threshold){
-            if(qMin(circuite.at(i).at(0),circuite.at(i+1).at(0))-threshold<=moveRightSensorX && qMax(circuite.at(i).at(0),circuite.at(i+1).at(0))+threshold>=moveRightSensorX){
-                if(qMin(circuite.at(i).at(2),circuite.at(i+1).at(2))-threshold<=moveSensorZ && qMax(circuite.at(i).at(2),circuite.at(i+1).at(2))+threshold>=moveSensorZ){
-                    rightWheel=0.0;
-                }
-            }
+           rightWheel=0.0;
         }
-    }
+
+        /*
+            Ecuacion de la recta perpendicular que pasa por un punto
+            z-z1 = -1/m * x - x1
+        */
+        /*
+            Calculo para saber a que lado de la recta esta un punto
+            (x0,z0) es el punto que queremos saber a que lado de la recta esta situado
+            d = (z2-z1)*x0 + (x1-x2)*z0 + (x2*z1-z2*x1)
+            d=0 pertenece
+            d>0 derecha
+            d<0 izquierda
+            sentido p1--->p2
+        */
+        float nuevaRectaPunto1X = 0;
+        float nuevaRectaPunto1Z;
+        float nuevaRectaPunto2X;
+        float nuevaRectaPunto2Z = 0;
+        // ecuacion de la recta perpendicular : z - circuite.at(i+1).at(2) = -1/m * x - circuite.at(i+1).at(0);
+        nuevaRectaPunto1Z = -1/m * nuevaRectaPunto1X - circuite.at(i+1).at(0) + circuite.at(i+1).at(2) ;
+        nuevaRectaPunto2X = (nuevaRectaPunto2Z - circuite.at(i+1).at(2) + circuite.at(i+1).at(0))/(-1/m);
+        float dRectaAntigua = (nuevaRectaPunto2Z - nuevaRectaPunto1Z)*circuite.at(i).at(0) + (nuevaRectaPunto1X - nuevaRectaPunto2X)*circuite.at(i).at(2)+(nuevaRectaPunto2X*nuevaRectaPunto1Z - nuevaRectaPunto2Z*nuevaRectaPunto1X);
+        float dNuevo = (nuevaRectaPunto2Z - nuevaRectaPunto1Z)*x + (nuevaRectaPunto1X - nuevaRectaPunto2X)*(moveSensorZ-1)+(nuevaRectaPunto2X*nuevaRectaPunto1Z - nuevaRectaPunto2Z*nuevaRectaPunto1X);
+        if(dRectaAntigua>0 && dNuevo<0){
+            i++;
+        }else if(dRectaAntigua<0 && dNuevo>0){
+            i++;
+        }
 }
 
 void GLWidget::setWheelSpeed(GLdouble speed){
