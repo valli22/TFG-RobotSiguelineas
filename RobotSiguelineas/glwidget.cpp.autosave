@@ -182,7 +182,7 @@ void GLWidget::drawRobot(){
 void GLWidget::movementController(){
 
     int i = 0;
-    // z = (z2-z1 / x2-x1) * (x-x1) + z1
+    // z = (z2-z1 / x2-x1) * (x-x1) + z1 esta mal
     //qDebug() << circuite.at(i).at(0) << circuite.at(i).at(1) << circuite.at(i).at(2);
     //qDebug() << circuite.at(i+1).at(0) << circuite.at(i+1).at(1) << circuite.at(i+1).at(2);
     //Sensor izquierdo

@@ -67,7 +67,7 @@ private:
     //Velocidad de las ruedas
     GLfloat wheelSpeed;
 
-    void keyPressEvent(QKeyEvent *event);
+    //void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
     void drawRobot();
     void movementController();
