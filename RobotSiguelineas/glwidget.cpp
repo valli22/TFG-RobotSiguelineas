@@ -181,40 +181,43 @@ void GLWidget::drawRobot(){
 
 void GLWidget::movementController(){
 
-    int i = 0;
-    // z = (z2-z1 / x2-x1) * (x-x1) + z1
-    //qDebug() << circuite.at(i).at(0) << circuite.at(i).at(1) << circuite.at(i).at(2);
-    //qDebug() << circuite.at(i+1).at(0) << circuite.at(i+1).at(1) << circuite.at(i+1).at(2);
-    //Sensor izquierdo
-    float m = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0));
-    float n = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0)) * circuite.at(i).at(0) + circuite.at(i).at(2);
-    //qDebug()<<m;
-    //qDebug()<<n;
-    //qDebug("AQUI SALE");
-    if(m*(0)+n-(5)==0){
-        qDebug("05 esta");
-    }
+    /*
+        x = x ... y = z
+        Ecuaciones a utilizar
+        z-z1 = m * (x-x1)  -->  z = m*x - m*x1 + z1
+        m = z2-z1 / x2-x1
+        por lo tanto segun la primera formula --> n = -m*x1 + z1
+        finalmente la formula quedara como .. z = m*x +n || z - m*x - n = 0
+    */
+    for(int i = 0;i<circuite.length()-1;i++){
+        float m = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0));
+        float n = -m*circuite.at(i).at(0) + circuite.at(i).at(2);
+        float moveSensorZ = z-(robotDiameter/2);
+        float moveRightSensorX = x+(sensorSeparation / 2.0f);
+        float moveLeftSensorX = x+(-sensorSeparation / 2.0f);
 
-    if(m*(2)+n-(1)==0){
-        qDebug("21 esta");
-    }
+        /*
+          Condiciones para que el punto (x2,z2) este en el segmento dado
+          -Estar en la recta infinita : m*x2 + n - z2 >= -threshold && m*x2 + n - z2 <= threshold
+          -Coordenada x2 entre las cordenadas x de los puntos extremos del segmento : min(x0,x1) <= x2 <= max(x0,x1)
+          -Misma situacion que la anterior con la coordenada z : min(z0,z1) <= z2 <= max(z0,z1)
+        */
 
-    if(m*(x-(sensorSeparation/2))+n-(z+(robotDiameter/2)>= -threshold && x-(sensorSeparation/2))+n-(z-(robotDiameter/2))<= threshold){
-        leftWheel=0.0;
+        if(moveSensorZ - m*moveLeftSensorX - n >= -threshold && moveSensorZ - m*moveLeftSensorX - n <= threshold){
+            if(qMin(circuite.at(i).at(0),circuite.at(i+1).at(0))-threshold<=moveLeftSensorX && qMax(circuite.at(i).at(0),circuite.at(i+1).at(0))+threshold>=moveLeftSensorX){
+                if(qMin(circuite.at(i).at(2),circuite.at(i+1).at(2))-threshold<=moveSensorZ && qMax(circuite.at(i).at(2),circuite.at(i+1).at(2))+threshold>=moveSensorZ){
+                    leftWheel=0.0;
+                }
+            }
+        }
+        if(moveSensorZ - m*moveRightSensorX - n >= -threshold && moveSensorZ - m*moveRightSensorX - n <= threshold){
+            if(qMin(circuite.at(i).at(0),circuite.at(i+1).at(0))-threshold<=moveRightSensorX && qMax(circuite.at(i).at(0),circuite.at(i+1).at(0))+threshold>=moveRightSensorX){
+                if(qMin(circuite.at(i).at(2),circuite.at(i+1).at(2))-threshold<=moveSensorZ && qMax(circuite.at(i).at(2),circuite.at(i+1).at(2))+threshold>=moveSensorZ){
+                    rightWheel=0.0;
+                }
+            }
+        }
     }
-    if(m*(x+(sensorSeparation/2))+n-(z+(robotDiameter/2)>= -threshold && x+(sensorSeparation/2))+n-(z-(robotDiameter/2))<= threshold){
-        rightWheel=0.0;
-    }
-
-    /*if((z+(robotDiameter/2)) - ((circuite.at(i+1).at(2) - circuite.at(i).at(2) / circuite.at(i+1).at(0) - circuite.at(i).at(0)) * ((x-(sensorSeparation/2)) - circuite.at(i).at(0)) + circuite.at(i).at(2)) >= -threshold && (z+(robotDiameter/2)) - ((circuite.at(i+1).at(2) - circuite.at(i).at(2) / circuite.at(i+1).at(0) - circuite.at(i).at(0)) * ((x-(sensorSeparation/2)) - circuite.at(i).at(0)) + circuite.at(i).at(2)) <= threshold){
-        leftWheel=0.0;
-    }
-
-    //Sensor derecho
-    if((z+(robotDiameter/2)) - ((circuite.at(i+1).at(2) - circuite.at(i).at(2) / circuite.at(i+1).at(0) - circuite.at(i).at(0)) * ((x+(sensorSeparation/2)) - circuite.at(i).at(0)) + circuite.at(i).at(2)) >= -threshold && (z+(robotDiameter/2)) - ((circuite.at(i+1).at(2) - circuite.at(i).at(2) / circuite.at(i+1).at(0) - circuite.at(i).at(0)) * ((x+(sensorSeparation/2)) - circuite.at(i).at(0)) + circuite.at(i).at(2)) <= threshold){
-        rightWheel = 0.0;
-    }*/
-
 }
 
 void GLWidget::setWheelSpeed(GLdouble speed){
