@@ -2,6 +2,7 @@
 #define GLWIDGET_H
 
 #include <QOpenGLWidget>
+#include "glm/gtc/matrix_transform.hpp"
 
 class GLWidget : public QOpenGLWidget
 {
@@ -69,6 +70,12 @@ private:
 
     //Punto del circuito que indica en la recta en la que se encuentra
     int i;
+
+    //Matrices
+    glm::mat4 projection;
+    glm::mat4 view;
+    glm::mat4 model;
+    glm::mat4 mvp;
 
     //void keyPressEvent(QKeyEvent *event);
     void drawCircuite();

@@ -16,7 +16,7 @@ GLWidget::GLWidget(QWidget *parent):
     start = false;
 
     //Inicio del robot en (0,0,5) con rotacion 0
-    x = 0.0f;
+    x = 3.0f;
     z = 5.0f;
     rot = 0.0f;
 
@@ -24,7 +24,7 @@ GLWidget::GLWidget(QWidget *parent):
     dt = 0.05f;
 
     threshold = 0.1;
-
+    model = glm::mat4(1.0);
     i=0;
 
     /*
@@ -63,32 +63,47 @@ void GLWidget::paintGL(){
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glm::vec3 cameraPos = glm::vec3(0.0f,5.0f,5.0f);
-    glm::vec3 cameraDir = glm::vec3(0.0f,0.0f,5.0f);
+    glm::vec3 cameraPos = glm::vec3(3.0f,15.0f,3.5f);
+    glm::vec3 cameraDir = glm::vec3(3.0f,0.0f,3.5f);
     glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
 
-    glm::mat4 view = glm::lookAt(cameraPos,cameraDir,up);
+    view = glm::lookAt(cameraPos,cameraDir,up);
 
     const float *viewM = (const float*)glm::value_ptr(view);
 
     glLoadMatrixf(viewM);
+
 
     if(start){
 
         drawCircuite();
 
         movementController();
-
         x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
         z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
 
-        glPushMatrix();
+        /*glPushMatrix();
             glTranslatef(x,0.0f,z);
             glRotatef(rot,0.0f,1.0f,0.0f);
 
             drawRobot();
         glPopMatrix();
+        */
+
+        model = glm::translate(model,glm::vec3(x,0.0f,z));
+        model = glm::rotate(model,rot,glm::vec3(0.0f,1.0f,0.0f));
+
+        mvp = projection * view * model;
+
+        const float *modelM = (const float*)glm::value_ptr(model);
+        glPushMatrix();
+            glLoadMatrixf(modelM);
+            drawRobot();
+        glPopMatrix();
+
+        qDebug()<<x;
+        qDebug()<<z;
 
         rightWheel = wheelSpeed;
         leftWheel = wheelSpeed;
@@ -110,11 +125,17 @@ void GLWidget::resizeGL(int w, int h){
     const GLdouble zFar = 25.0;
     const GLdouble fov = 75.0;
 
-    perspective(fov,aspect,zNear,zFar);
+    projection = glm::perspective(fov,aspect,zNear,zFar);
+
+    const float *projectionM = (const float*)glm::value_ptr(projection);
+
+    glLoadMatrixf(projectionM);
+
+    //perspective(fov,aspect,zNear,zFar);
 
 }
 
-void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
+/*void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
 {
     GLdouble xmin, xmax, ymin, ymax;
 
@@ -124,7 +145,7 @@ void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdou
     xmax = -xmin;
 
     glFrustum( xmin, xmax, ymin, ymax, zNear, zFar );
-}
+}*/
 
 
 /*
