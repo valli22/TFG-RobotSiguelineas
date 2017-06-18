@@ -15,16 +15,10 @@ GLWidget::GLWidget(QWidget *parent):
 
     start = false;
 
-    //Inicio del robot en (0,0,5) con rotacion 0
-    x = 3.0f;
-    z = 5.0f;
-    rot = 0.0f;
-
-
     dt = 0.05f;
 
     threshold = 0.1;
-    model = glm::mat4(1.0);
+
     i=0;
 
     /*
@@ -61,24 +55,25 @@ void GLWidget::paintGL(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
 
-    glm::vec3 cameraPos = glm::vec3(3.0f,15.0f,3.5f);
-    glm::vec3 cameraDir = glm::vec3(3.0f,0.0f,3.5f);
-    glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
-
-    view = glm::lookAt(cameraPos,cameraDir,up);
-
-    const float *viewM = (const float*)glm::value_ptr(view);
-
-    glLoadMatrixf(viewM);
 
 
     if(start){
 
+        glLoadIdentity();
+        glm::vec3 cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
+        glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
+        glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
+
+        view = glm::lookAt(cameraPos,cameraDir,up);
+
+        const float *viewM = (const float*)glm::value_ptr(view);
+
+        glLoadMatrixf(viewM);
+
         drawCircuite();
 
-        movementController();
+        //movementController();
         x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
         z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
@@ -91,19 +86,24 @@ void GLWidget::paintGL(){
         glPopMatrix();
         */
 
-        model = glm::translate(model,glm::vec3(x,0.0f,z));
-        model = glm::rotate(model,rot,glm::vec3(0.0f,1.0f,0.0f));
+        model = glm::translate(glm::mat4(1.0),glm::vec3(x,0.0f,z));
+        model = glm::rotate(model,(float)((rot*M_PI)/180),glm::vec3(0.0f,1.0f,0.0f));
 
         mvp = projection * view * model;
 
+
         const float *modelM = (const float*)glm::value_ptr(model);
         glPushMatrix();
-            glLoadMatrixf(modelM);
+            glMultMatrixf(modelM);
             drawRobot();
         glPopMatrix();
 
+        //qDebug()<<circuite.at(0).at(0);
+        //qDebug()<<circuite.at(0).at(2);
+        /*
         qDebug()<<x;
         qDebug()<<z;
+        */
 
         rightWheel = wheelSpeed;
         leftWheel = wheelSpeed;
@@ -122,10 +122,9 @@ void GLWidget::resizeGL(int w, int h){
 
     GLdouble aspect = w / h;
     const GLdouble zNear = 1.0;
-    const GLdouble zFar = 25.0;
-    const GLdouble fov = 75.0;
+    const GLdouble zFar = 50.0;
 
-    projection = glm::perspective(fov,aspect,zNear,zFar);
+    projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
 
     const float *projectionM = (const float*)glm::value_ptr(projection);
 
@@ -148,8 +147,8 @@ void GLWidget::resizeGL(int w, int h){
 }*/
 
 
-/*
- * void GLWidget::keyPressEvent(QKeyEvent *event)
+
+/*void GLWidget::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_A:
@@ -159,34 +158,21 @@ void GLWidget::resizeGL(int w, int h){
         rightWheel = 0.0f;
         break;
     }
-}
-*/
+}*/
+
 
 void GLWidget::drawCircuite()
 {
-    if(path==""){
-        path = "F:\\TFG\\Git\\TFG-RobotSiguelineas\\Circuitos\\circuito1giro.txt";
-    }
-    QFile file(path);
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        return;
-
+    glLineWidth(2.0f);
     glBegin(GL_LINE_STRIP);
-        while(!file.atEnd()){
-            QList<float> vertex;
-            QString line = file.readLine();
-            QStringList points = line.split(' ');
-            vertex<<points.at(0).toFloat()<<points.at(1).toFloat()<<points.at(2).toFloat();
-            circuite<<vertex;
-            glVertex3f(vertex.at(0),vertex.at(1),vertex.at(2));
-
+        for(int i = 0; i<circuite.length();i++){
+            glVertex3f(circuite.at(i).at(0),circuite.at(i).at(1),circuite.at(i).at(2));
         }
     glEnd();
-
 }
 
 void GLWidget::drawRobot(){
+    /*
     //Sensor derecho
     glPushMatrix();
         glTranslatef(rightSensorX,0,sensorZ);
@@ -200,6 +186,30 @@ void GLWidget::drawRobot(){
     glPopMatrix();
 
     glutSolidCube(robotDiameter);
+    */
+    /*
+    glBegin(GL_QUAD_STRIP);
+        glVertex3f(-robotWidth/2,0,robotHigh/2);
+        glVertex3f(-robotWidth/2,0,-robotHigh/2);
+        glVertex3f(robotWidth/2,0,robotHigh/2);
+        glVertex3f(robotWidth/2,0,-robotHigh/2);
+    glEnd();
+    */
+    glPushMatrix();
+        glTranslatef(rightSensorX,0,-sensorZ);
+        glutSolidCube(0.05);
+    glPopMatrix();
+
+    //Sensor izquierdo
+    glPushMatrix();
+        glTranslatef(leftSensorX,0,-sensorZ);
+        glutSolidCube(0.05);
+    glPopMatrix();
+
+    glTranslatef(0,0,((robotHigh/2)-distanceToWheels));
+    glScalef(robotWidth,0.5,robotHigh);
+    glutSolidCube(1.0f);
+
 }
 
 void GLWidget::movementController(){
@@ -214,7 +224,7 @@ void GLWidget::movementController(){
     */
         float m = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0));
         float n = -m*circuite.at(i).at(0) + circuite.at(i).at(2);
-        float moveSensorZ = z-(robotDiameter/2);
+        float moveSensorZ = z-(robotWidth/2);
         float moveRightSensorX = x+(sensorSeparation / 2.0f);
         float moveLeftSensorX = x+(-sensorSeparation / 2.0f);
 
@@ -275,21 +285,86 @@ void GLWidget::setWheelSeparation(GLdouble separation){
     wheelSeparation = separation;
 }
 
-void GLWidget::setSensorSeparation(GLdouble separation){
+void GLWidget::setSensorPosition(GLdouble separation,GLdouble distance){
     sensorSeparation = separation;
+    sensorDistance = distance;
     leftSensorX = -sensorSeparation / 2.0f;
     rightSensorX = sensorSeparation / 2.0f;
 }
 
-void GLWidget::setRobotDiameter(GLdouble diameter){
-    robotDiameter = diameter;
-    sensorZ = -robotDiameter/2.0f;
+void GLWidget::setRobotSize(GLdouble width, GLdouble high){
+    robotWidth = width;
+    robotHigh = high;
+    //sensorZ = -robotDiameter/2.0f;
+}
+
+void GLWidget::setWheelPosition(GLdouble dToWheel){
+    distanceToWheels = dToWheel;
 }
 
 void GLWidget::setCircuite(QString circuite){
-    path = circuite;
+    QString path = circuite;
+
+    if(path==""){
+        path = "F:\\TFG\\Git\\TFG-RobotSiguelineas\\Circuitos\\circuito2.txt";
+    }
+
+    QFile file(path);
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return;
+
+    while(!file.atEnd()){
+        QList<float> vertex;
+        QString line = file.readLine();
+        line.replace(',','.');
+        int index = line.indexOf('.',2);
+        line.replace(index,1,' ');
+        QStringList points = line.split(' ');
+        vertex<<points.at(0).toFloat()<<0<<points.at(1).toFloat();
+        this->circuite<<vertex;
+    }
+
+    float left = this->circuite.at(0).at(0);
+    float right = this->circuite.at(0).at(0);
+    float top = this->circuite.at(0).at(2);
+    float bottom = this->circuite.at(0).at(2);
+    float high;
+    for(int i = 0; i<this->circuite.length();i++){
+        if(left > this->circuite.at(i).at(0))
+            left = this->circuite.at(i).at(0);
+        if(right < this->circuite.at(i).at(0))
+            right = this->circuite.at(i).at(0);
+        if(bottom > this->circuite.at(i).at(2))
+            bottom = this->circuite.at(i).at(2);
+        if(top < this->circuite.at(i).at(2))
+            top = this->circuite.at(i).at(2);
+    }
+
+    cameraPosCircuite<<(left+right)/2;
+
+    if(right-left > top-bottom){
+        high = right-left;
+    }else{
+        high = top-bottom;
+    }
+
+    //Mediante trigonometria se calcula la altura que deberia tener la camara para que viera todo el circuito y se le añade un poco de margen
+    cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180));
+
+    cameraPosCircuite<<(bottom+top)/2;
+
+    /*
+     * para comprobar que los sensores estan bien colocados
+    x = cameraPosCircuite.at(0);
+    z = cameraPosCircuite.at(2);
+    */
+    x = this->circuite.at(0).at(0);
+    z = this->circuite.at(0).at(2);
+    rot = 0.0f;
 }
 
 void GLWidget::startRace(){
+    sensorZ = sensorDistance + distanceToWheels;
     start= true;
 }

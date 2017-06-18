@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
@@ -31,8 +32,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
-    QHBoxLayout *horizontalLayout;
-    GLWidget *widget;
+    QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
     QLabel *wheelSpeedLabel;
     QDoubleSpinBox *wheelSpeed;
@@ -40,15 +40,26 @@ public:
     QDoubleSpinBox *wheelRadius;
     QLabel *wheelSeparationLabel;
     QDoubleSpinBox *wheelSeparation;
+    QLabel *distanceToWheelsLabel;
+    QDoubleSpinBox *distanceToWheels;
+    QHBoxLayout *SensorLabelHorizontalLayout;
+    QLabel *sensorDistanceLabel;
     QLabel *sensorSeparationLabel;
+    QHBoxLayout *SensorHorizontalLayout;
+    QDoubleSpinBox *sensorDistance;
     QDoubleSpinBox *sensorSeparation;
-    QLabel *robotDiameterLabel;
-    QDoubleSpinBox *robotDiameter;
+    QHBoxLayout *RobotSizeLabelHorizontalLayout;
+    QLabel *robotHighLabel;
+    QLabel *robotWidthLabel;
+    QHBoxLayout *RobotSizeHorizontalLayout;
+    QDoubleSpinBox *robotHigh;
+    QDoubleSpinBox *robotWidth;
     QLabel *circuitePathLabel;
     QPlainTextEdit *circuitePath;
     QPushButton *pushButton_2;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButton;
+    GLWidget *widget;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -58,25 +69,19 @@ public:
         MainWindow->resize(1145, 495);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        horizontalLayout = new QHBoxLayout(centralWidget);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
-        widget = new GLWidget(centralWidget);
-        widget->setObjectName(QStringLiteral("widget"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
-        widget->setSizePolicy(sizePolicy);
-
-        horizontalLayout->addWidget(widget);
-
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        verticalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        verticalLayout->setContentsMargins(0, -1, -1, -1);
         wheelSpeedLabel = new QLabel(centralWidget);
         wheelSpeedLabel->setObjectName(QStringLiteral("wheelSpeedLabel"));
+        wheelSpeedLabel->setEnabled(true);
+        wheelSpeedLabel->setScaledContents(false);
 
         verticalLayout->addWidget(wheelSpeedLabel);
 
@@ -105,25 +110,83 @@ public:
 
         verticalLayout->addWidget(wheelSeparation);
 
+        distanceToWheelsLabel = new QLabel(centralWidget);
+        distanceToWheelsLabel->setObjectName(QStringLiteral("distanceToWheelsLabel"));
+
+        verticalLayout->addWidget(distanceToWheelsLabel);
+
+        distanceToWheels = new QDoubleSpinBox(centralWidget);
+        distanceToWheels->setObjectName(QStringLiteral("distanceToWheels"));
+
+        verticalLayout->addWidget(distanceToWheels);
+
+        SensorLabelHorizontalLayout = new QHBoxLayout();
+        SensorLabelHorizontalLayout->setSpacing(6);
+        SensorLabelHorizontalLayout->setObjectName(QStringLiteral("SensorLabelHorizontalLayout"));
+        SensorLabelHorizontalLayout->setContentsMargins(0, -1, -1, 3);
+        sensorDistanceLabel = new QLabel(centralWidget);
+        sensorDistanceLabel->setObjectName(QStringLiteral("sensorDistanceLabel"));
+
+        SensorLabelHorizontalLayout->addWidget(sensorDistanceLabel);
+
         sensorSeparationLabel = new QLabel(centralWidget);
         sensorSeparationLabel->setObjectName(QStringLiteral("sensorSeparationLabel"));
 
-        verticalLayout->addWidget(sensorSeparationLabel);
+        SensorLabelHorizontalLayout->addWidget(sensorSeparationLabel);
+
+
+        verticalLayout->addLayout(SensorLabelHorizontalLayout);
+
+        SensorHorizontalLayout = new QHBoxLayout();
+        SensorHorizontalLayout->setSpacing(6);
+        SensorHorizontalLayout->setObjectName(QStringLiteral("SensorHorizontalLayout"));
+        SensorHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
+        sensorDistance = new QDoubleSpinBox(centralWidget);
+        sensorDistance->setObjectName(QStringLiteral("sensorDistance"));
+
+        SensorHorizontalLayout->addWidget(sensorDistance);
 
         sensorSeparation = new QDoubleSpinBox(centralWidget);
         sensorSeparation->setObjectName(QStringLiteral("sensorSeparation"));
 
-        verticalLayout->addWidget(sensorSeparation);
+        SensorHorizontalLayout->addWidget(sensorSeparation);
 
-        robotDiameterLabel = new QLabel(centralWidget);
-        robotDiameterLabel->setObjectName(QStringLiteral("robotDiameterLabel"));
 
-        verticalLayout->addWidget(robotDiameterLabel);
+        verticalLayout->addLayout(SensorHorizontalLayout);
 
-        robotDiameter = new QDoubleSpinBox(centralWidget);
-        robotDiameter->setObjectName(QStringLiteral("robotDiameter"));
+        RobotSizeLabelHorizontalLayout = new QHBoxLayout();
+        RobotSizeLabelHorizontalLayout->setSpacing(6);
+        RobotSizeLabelHorizontalLayout->setObjectName(QStringLiteral("RobotSizeLabelHorizontalLayout"));
+        RobotSizeLabelHorizontalLayout->setContentsMargins(-1, -1, -1, 3);
+        robotHighLabel = new QLabel(centralWidget);
+        robotHighLabel->setObjectName(QStringLiteral("robotHighLabel"));
 
-        verticalLayout->addWidget(robotDiameter);
+        RobotSizeLabelHorizontalLayout->addWidget(robotHighLabel);
+
+        robotWidthLabel = new QLabel(centralWidget);
+        robotWidthLabel->setObjectName(QStringLiteral("robotWidthLabel"));
+
+        RobotSizeLabelHorizontalLayout->addWidget(robotWidthLabel);
+
+
+        verticalLayout->addLayout(RobotSizeLabelHorizontalLayout);
+
+        RobotSizeHorizontalLayout = new QHBoxLayout();
+        RobotSizeHorizontalLayout->setSpacing(6);
+        RobotSizeHorizontalLayout->setObjectName(QStringLiteral("RobotSizeHorizontalLayout"));
+        RobotSizeHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
+        robotHigh = new QDoubleSpinBox(centralWidget);
+        robotHigh->setObjectName(QStringLiteral("robotHigh"));
+
+        RobotSizeHorizontalLayout->addWidget(robotHigh);
+
+        robotWidth = new QDoubleSpinBox(centralWidget);
+        robotWidth->setObjectName(QStringLiteral("robotWidth"));
+
+        RobotSizeHorizontalLayout->addWidget(robotWidth);
+
+
+        verticalLayout->addLayout(RobotSizeHorizontalLayout);
 
         circuitePathLabel = new QLabel(centralWidget);
         circuitePathLabel->setObjectName(QStringLiteral("circuitePathLabel"));
@@ -132,11 +195,11 @@ public:
 
         circuitePath = new QPlainTextEdit(centralWidget);
         circuitePath->setObjectName(QStringLiteral("circuitePath"));
-        QSizePolicy sizePolicy1(QSizePolicy::Ignored, QSizePolicy::Ignored);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(1);
-        sizePolicy1.setHeightForWidth(circuitePath->sizePolicy().hasHeightForWidth());
-        circuitePath->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(1);
+        sizePolicy.setHeightForWidth(circuitePath->sizePolicy().hasHeightForWidth());
+        circuitePath->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(circuitePath);
 
@@ -155,7 +218,17 @@ public:
         verticalLayout->addWidget(pushButton);
 
 
-        horizontalLayout->addLayout(verticalLayout);
+        gridLayout->addLayout(verticalLayout, 0, 1, 1, 1);
+
+        widget = new GLWidget(centralWidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
+        widget->setSizePolicy(sizePolicy1);
+
+        gridLayout->addWidget(widget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
 
@@ -171,8 +244,11 @@ public:
         wheelSpeedLabel->setText(QApplication::translate("MainWindow", "Wheel speed", Q_NULLPTR));
         wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius", Q_NULLPTR));
         wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
+        distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels", Q_NULLPTR));
+        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance", Q_NULLPTR));
         sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
-        robotDiameterLabel->setText(QApplication::translate("MainWindow", "Robot diameter", Q_NULLPTR));
+        robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high", Q_NULLPTR));
+        robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));

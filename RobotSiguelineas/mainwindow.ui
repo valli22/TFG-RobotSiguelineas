@@ -17,23 +17,25 @@
    <string>Robot Siguelineas</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="GLWidget" name="widget" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
      <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetDefaultConstraint</enum>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
       <item>
        <widget class="QLabel" name="wheelSpeedLabel">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="text">
          <string>Wheel speed</string>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
@@ -61,24 +63,85 @@
        <widget class="QDoubleSpinBox" name="wheelSeparation"/>
       </item>
       <item>
-       <widget class="QLabel" name="sensorSeparationLabel">
+       <widget class="QLabel" name="distanceToWheelsLabel">
         <property name="text">
-         <string>Sensor separation</string>
+         <string>Distance to wheels</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="sensorSeparation"/>
+       <widget class="QDoubleSpinBox" name="distanceToWheels"/>
       </item>
       <item>
-       <widget class="QLabel" name="robotDiameterLabel">
-        <property name="text">
-         <string>Robot diameter</string>
+       <layout class="QHBoxLayout" name="SensorLabelHorizontalLayout">
+        <property name="leftMargin">
+         <number>0</number>
         </property>
-       </widget>
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="sensorDistanceLabel">
+          <property name="text">
+           <string>Sensor distance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="sensorSeparationLabel">
+          <property name="text">
+           <string>Sensor separation</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="robotDiameter"/>
+       <layout class="QHBoxLayout" name="SensorHorizontalLayout">
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QDoubleSpinBox" name="sensorDistance"/>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="sensorSeparation"/>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="RobotSizeLabelHorizontalLayout">
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="robotHighLabel">
+          <property name="text">
+           <string>Robot high</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="robotWidthLabel">
+          <property name="text">
+           <string>Robot width</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="RobotSizeHorizontalLayout">
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QDoubleSpinBox" name="robotHigh"/>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="robotWidth"/>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QLabel" name="circuitePathLabel">
@@ -125,6 +188,16 @@
        </widget>
       </item>
      </layout>
+    </item>
+    <item row="0" column="0">
+     <widget class="GLWidget" name="widget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>

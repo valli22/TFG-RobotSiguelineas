@@ -17,8 +17,9 @@ public:
     void setWheelSpeed(GLdouble speed);
     void setWheelRadius(GLdouble radius);
     void setWheelSeparation(GLdouble separation);
-    void setSensorSeparation(GLdouble separation);
-    void setRobotDiameter(GLdouble diameter);
+    void setSensorPosition(GLdouble separation,GLdouble distance);
+    void setRobotSize(GLdouble width, GLdouble high);
+    void setWheelPosition(GLdouble dToWheel);
     void setCircuite(QString circuite);
     void startRace();
 
@@ -47,19 +48,30 @@ private:
     //Distancia entre sensores
     GLfloat sensorSeparation;
 
-    //Diamentro del robot
-    GLfloat robotDiameter;
+    //Distancia desde el borde del robot a los sensores
+    GLfloat sensorDistance;
+
+    //Dimensiones del robot
+    GLfloat robotWidth;
+    GLfloat robotHigh;
+
+    //Distancia desde el borde del robot a las ruedas
+    GLfloat distanceToWheels;
 
     //Posiciones de los sensores en cada momento
     GLfloat leftSensorX;
     GLfloat rightSensorX;
     GLfloat sensorZ;
 
-    //Path del archivo del circuito
-    QString path;
-
     bool start;
 
+    //FOV de la camara
+    const GLdouble fov = 75.0;
+
+    //Posicion de la camara que se posicionara segun la posicion del circuito
+    QList<float> cameraPosCircuite;
+
+    //Lista de puntos que conforman el circuito
     QList< QList<float> > circuite;
 
     //Umbral de cercania de los sensores a las lineas del circuito
