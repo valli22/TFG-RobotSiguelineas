@@ -8,6 +8,8 @@
 #include <qlist.h>
 #include <QFile>
 #include <QDebug>
+#include "glm/ext.hpp"
+#include "glm/gtx/string_cast.hpp"
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
@@ -91,6 +93,13 @@ void GLWidget::paintGL(){
 
         mvp = projection * view * model;
 
+        //mat4xvec4 vec4 is consider column
+        //vec4xmat4 vec4 is consider row
+        glm::vec4 prueba = mvp*leftSensorPos;
+        glm::vec4 prueba2 = mvp*rightSensorPos;
+        //qDebug()<<x<<z;
+        //qDebug()<<prueba.x/prueba.w<<prueba.y/prueba.w<<prueba.z/prueba.w<<prueba.w/prueba.w;
+        //qDebug()<<prueba2.x/prueba2.w<<prueba2.y/prueba2.w<<prueba2.z/prueba2.w<<prueba2.w/prueba2.w;
 
         const float *modelM = (const float*)glm::value_ptr(model);
         glPushMatrix();
@@ -148,7 +157,7 @@ void GLWidget::resizeGL(int w, int h){
 
 
 
-/*void GLWidget::keyPressEvent(QKeyEvent *event)
+void GLWidget::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_A:
@@ -158,7 +167,7 @@ void GLWidget::resizeGL(int w, int h){
         rightWheel = 0.0f;
         break;
     }
-}*/
+}
 
 
 void GLWidget::drawCircuite()
@@ -366,5 +375,7 @@ void GLWidget::setCircuite(QString circuite){
 
 void GLWidget::startRace(){
     sensorZ = sensorDistance + distanceToWheels;
+    leftSensorPos = glm::vec4 (circuite.at(0).at(0)+leftSensorX,0,circuite.at(0).at(2)-sensorZ,1);
+    rightSensorPos = glm::vec4 (circuite.at(0).at(0)+rightSensorX,0,circuite.at(0).at(2)-sensorZ,1);
     start= true;
 }

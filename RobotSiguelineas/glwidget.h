@@ -62,6 +62,8 @@ private:
     GLfloat leftSensorX;
     GLfloat rightSensorX;
     GLfloat sensorZ;
+    glm::vec4 leftSensorPos;
+    glm::vec4 rightSensorPos;
 
     bool start;
 
@@ -89,7 +91,7 @@ private:
     glm::mat4 model;
     glm::mat4 mvp;
 
-    //void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
     void drawRobot();
     void movementController();
