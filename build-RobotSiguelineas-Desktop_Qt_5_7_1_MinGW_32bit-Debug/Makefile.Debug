@@ -315,6 +315,87 @@ debug/moc_glwidget.cpp: ../../../../Qt/5.7/mingw53_32/include/QtWidgets/QOpenGLW
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/fwd.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_int.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/setup.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/platform.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_float.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/precision.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle_func.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_vectorize.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/exponential.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_fixes.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/common.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/geometric.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/matrix.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/matrix.hpp \
 		../RobotSiguelineas/glwidget.h \
 		../../../../Qt/5.7/mingw53_32/bin/moc.exe
 	'F:\Qt\5.7\mingw53_32\bin\moc.exe' $(DEFINES) -D__GNUC__ -DWIN32 -IF:/Qt/5.7/mingw53_32/mkspecs/win32-g++ -IF:/TFG/Git/TFG-RobotSiguelineas/RobotSiguelineas -IF:/Qt/5.7/mingw53_32/include -IF:/Qt/5.7/mingw53_32/include/QtOpenGL -IF:/Qt/5.7/mingw53_32/include/QtWidgets -IF:/Qt/5.7/mingw53_32/include/QtGui -IF:/Qt/5.7/mingw53_32/include/QtANGLE -IF:/Qt/5.7/mingw53_32/include/QtCore -I. -IF:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include -IF:/Qt/Tools/mingw530_32/lib/gcc/i686-w64-mingw32/5.3.0/include-fixed -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++ -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/i686-w64-mingw32 -IF:/Qt/Tools/mingw530_32/i686-w64-mingw32/include/c++/backward ../RobotSiguelineas/glwidget.h -o debug/moc_glwidget.cpp
@@ -436,7 +517,88 @@ ui_mainwindow.h: ../RobotSiguelineas/mainwindow.ui \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2.h \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/fwd.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_int.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/setup.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/platform.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_float.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/precision.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle_func.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_vectorize.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/exponential.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_fixes.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/common.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/geometric.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/matrix.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/matrix.hpp
 	'F:\Qt\5.7\mingw53_32\bin\uic.exe' ../RobotSiguelineas/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -679,11 +841,17 @@ debug/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mainw
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qinputmethod.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QButtonGroup \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qbuttongroup.h \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QDoubleSpinBox \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qspinbox.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractspinbox.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qvalidator.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qregularexpression.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QGridLayout \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayout.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qlayoutitem.h \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qgridlayout.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qboxlayout.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QHBoxLayout \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QHeaderView \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qheaderview.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemview.h \
@@ -693,26 +861,30 @@ debug/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mainw
 		../../../../Qt/5.7/mingw53_32/include/QtCore/qitemselectionmodel.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractitemdelegate.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qstyleoption.h \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractspinbox.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qvalidator.h \
-		../../../../Qt/5.7/mingw53_32/include/QtCore/qregularexpression.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qslider.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractslider.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qstyle.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qtabbar.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qrubberband.h \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QLineEdit \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qlineedit.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QLabel \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qlabel.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QPlainTextEdit \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qplaintextedit.h \
+		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qtextedit.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextdocument.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextoption.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextcursor.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextformat.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qpen.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextoption.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qabstracttextdocumentlayout.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qtextlayout.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qglyphrun.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qrawfont.h \
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qfontdatabase.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QPushButton \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qpushbutton.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qabstractbutton.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QSpacerItem \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QSpinBox \
-		../../../../Qt/5.7/mingw53_32/include/QtWidgets/qspinbox.h \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QVBoxLayout \
 		../../../../Qt/5.7/mingw53_32/include/QtWidgets/QWidget \
 		../RobotSiguelineas/glwidget.h \
@@ -728,7 +900,88 @@ debug/mainwindow.o: ../RobotSiguelineas/mainwindow.cpp ../RobotSiguelineas/mainw
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2.h \
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
-		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h
+		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/fwd.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_int.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/setup.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/platform.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_float.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/precision.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_swizzle_func.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/vec4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat2x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat3x4.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x2.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x3.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_vec1.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_vector_relational_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_vectorize.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_exponential_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/exponential.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/_fixes.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_common_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/common.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_geometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/geometric.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_matrix_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/simd/matrix.h \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/constants.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.hpp \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric_simd.inl \
+		../../../../Qt/5.7/mingw53_32/include/glm/matrix.hpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/mainwindow.o ../RobotSiguelineas/mainwindow.cpp
 
 debug/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidget.h \
@@ -842,9 +1095,6 @@ debug/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidget.
 		../../../../Qt/5.7/mingw53_32/include/QtANGLE/GLES2/gl2platform.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopengles2ext.h \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/qopenglext.h \
-		../../../../Qt/5.7/mingw53_32/include/GL/freeglut.h \
-		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_std.h \
-		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_ext.h \
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/matrix_transform.hpp \
 		../../../../Qt/5.7/mingw53_32/include/glm/mat4x4.hpp \
 		../../../../Qt/5.7/mingw53_32/include/glm/detail/type_mat4x4.hpp \
@@ -926,6 +1176,9 @@ debug/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidget.
 		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric.inl \
 		../../../../Qt/5.7/mingw53_32/include/glm/detail/func_trigonometric_simd.inl \
 		../../../../Qt/5.7/mingw53_32/include/glm/matrix.hpp \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_std.h \
+		../../../../Qt/5.7/mingw53_32/include/GL/freeglut_ext.h \
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/type_ptr.hpp \
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/quaternion.hpp \
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/quaternion.inl \
@@ -933,7 +1186,10 @@ debug/glwidget.o: ../RobotSiguelineas/glwidget.cpp ../RobotSiguelineas/glwidget.
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/quaternion_simd.inl \
 		../../../../Qt/5.7/mingw53_32/include/glm/gtc/type_ptr.inl \
 		../../../../Qt/5.7/mingw53_32/include/QtGui/QKeyEvent \
-		../../../../Qt/5.7/mingw53_32/include/QtCore/QTextStream
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QTextStream \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/qmath.h \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QFile \
+		../../../../Qt/5.7/mingw53_32/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug/glwidget.o ../RobotSiguelineas/glwidget.cpp
 
 debug/moc_mainwindow.o: debug/moc_mainwindow.cpp 

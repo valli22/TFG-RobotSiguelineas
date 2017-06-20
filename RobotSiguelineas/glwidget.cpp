@@ -8,8 +8,6 @@
 #include <qlist.h>
 #include <QFile>
 #include <QDebug>
-#include "glm/ext.hpp"
-#include "glm/gtx/string_cast.hpp"
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
@@ -19,28 +17,7 @@ GLWidget::GLWidget(QWidget *parent):
 
     dt = 0.05f;
 
-    threshold = 0.1;
-
-    i=0;
-
-    /*
-
-    //Velocidad inicial de las ruedas
-    leftWheel = 0.0f;
-    rightWheel = 0.0f;
-
-    wheelRadius = 1.0f;
-    wheelSeparation = 0.01f;
-
-
-    sensorSeparation = 0.5f;
-    robotDiameter = 0.5f;
-
-    leftSensorX = -sensorSeparation / 2.0f;
-    rightSensorX = sensorSeparation / 2.0f;
-    sensorZ = -robotDiameter/2.0f;
-
-    */
+    threshold = 0.15;
 
     setFocusPolicy(Qt::StrongFocus);
 }
@@ -75,44 +52,24 @@ void GLWidget::paintGL(){
 
         drawCircuite();
 
-        //movementController();
+        movementController();
         x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
         z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
 
-        /*glPushMatrix();
-            glTranslatef(x,0.0f,z);
-            glRotatef(rot,0.0f,1.0f,0.0f);
-
-            drawRobot();
-        glPopMatrix();
-        */
-
         model = glm::translate(glm::mat4(1.0),glm::vec3(x,0.0f,z));
         model = glm::rotate(model,(float)((rot*M_PI)/180),glm::vec3(0.0f,1.0f,0.0f));
 
-        mvp = projection * view * model;
-
         //mat4xvec4 vec4 is consider column
         //vec4xmat4 vec4 is consider row
-        glm::vec4 prueba = mvp*leftSensorPos;
-        glm::vec4 prueba2 = mvp*rightSensorPos;
-        //qDebug()<<x<<z;
-        //qDebug()<<prueba.x/prueba.w<<prueba.y/prueba.w<<prueba.z/prueba.w<<prueba.w/prueba.w;
-        //qDebug()<<prueba2.x/prueba2.w<<prueba2.y/prueba2.w<<prueba2.z/prueba2.w<<prueba2.w/prueba2.w;
+        leftSensorPos = model*leftSensorVector;
+        rightSensorPos = model*rightSensorVector;
 
         const float *modelM = (const float*)glm::value_ptr(model);
         glPushMatrix();
             glMultMatrixf(modelM);
             drawRobot();
         glPopMatrix();
-
-        //qDebug()<<circuite.at(0).at(0);
-        //qDebug()<<circuite.at(0).at(2);
-        /*
-        qDebug()<<x;
-        qDebug()<<z;
-        */
 
         rightWheel = wheelSpeed;
         leftWheel = wheelSpeed;
@@ -139,36 +96,7 @@ void GLWidget::resizeGL(int w, int h){
 
     glLoadMatrixf(projectionM);
 
-    //perspective(fov,aspect,zNear,zFar);
-
 }
-
-/*void GLWidget::perspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
-{
-    GLdouble xmin, xmax, ymin, ymax;
-
-    ymax = zNear * tan( fovy * M_PI / 360.0 );
-    ymin = -ymax;
-    xmin = ymin * aspect;
-    xmax = -xmin;
-
-    glFrustum( xmin, xmax, ymin, ymax, zNear, zFar );
-}*/
-
-
-
-void GLWidget::keyPressEvent(QKeyEvent *event)
-{
-    switch (event->key()) {
-    case Qt::Key_A:
-        leftWheel = 0.0f;
-        break;
-    case Qt::Key_D:
-        rightWheel = 0.0f;
-        break;
-    }
-}
-
 
 void GLWidget::drawCircuite()
 {
@@ -181,29 +109,7 @@ void GLWidget::drawCircuite()
 }
 
 void GLWidget::drawRobot(){
-    /*
-    //Sensor derecho
-    glPushMatrix();
-        glTranslatef(rightSensorX,0,sensorZ);
-        glutSolidCube(0.1);
-    glPopMatrix();
 
-    //Sensor izquierdo
-    glPushMatrix();
-        glTranslatef(leftSensorX,0,sensorZ);
-        glutSolidCube(0.1);
-    glPopMatrix();
-
-    glutSolidCube(robotDiameter);
-    */
-    /*
-    glBegin(GL_QUAD_STRIP);
-        glVertex3f(-robotWidth/2,0,robotHigh/2);
-        glVertex3f(-robotWidth/2,0,-robotHigh/2);
-        glVertex3f(robotWidth/2,0,robotHigh/2);
-        glVertex3f(robotWidth/2,0,-robotHigh/2);
-    glEnd();
-    */
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
         glutSolidCube(0.05);
@@ -222,62 +128,20 @@ void GLWidget::drawRobot(){
 }
 
 void GLWidget::movementController(){
-
-    /*
-        x = x ... y = z
-        Ecuaciones a utilizar
-        z-z1 = m * (x-x1)  -->  z = m*x - m*x1 + z1
-        m = z2-z1 / x2-x1
-        por lo tanto segun la primera formula --> n = -m*x1 + z1
-        finalmente la formula quedara como .. z = m*x +n || z - m*x - n = 0
-    */
-        float m = (circuite.at(i+1).at(2) - circuite.at(i).at(2)) / (circuite.at(i+1).at(0) - circuite.at(i).at(0));
-        float n = -m*circuite.at(i).at(0) + circuite.at(i).at(2);
-        float moveSensorZ = z-(robotWidth/2);
-        float moveRightSensorX = x+(sensorSeparation / 2.0f);
-        float moveLeftSensorX = x+(-sensorSeparation / 2.0f);
-
-        /*
-          Condiciones para que el punto (x2,z2) este en el segmento dado
-          -Estar en la recta infinita : m*x2 + n - z2 >= -threshold && m*x2 + n - z2 <= threshold
-          -Coordenada x2 entre las cordenadas x de los puntos extremos del segmento : min(x0,x1) <= x2 <= max(x0,x1)
-          -Misma situacion que la anterior con la coordenada z : min(z0,z1) <= z2 <= max(z0,z1)
-        */
-
-        if(moveSensorZ - m*moveLeftSensorX - n >= -threshold && moveSensorZ - m*moveLeftSensorX - n <= threshold){
-           leftWheel=0.0;
+    for(int i=0;i<circuite.length();i++){
+        float distance = sqrt(pow(circuite.at(i).at(0)-leftSensorPos.x,2)+pow(circuite.at(i).at(2)-leftSensorPos.z,2));
+        if(distance<threshold){
+            leftWheel = 0;
+            break;
         }
-        if(moveSensorZ - m*moveRightSensorX - n >= -threshold && moveSensorZ - m*moveRightSensorX - n <= threshold){
-           rightWheel=0.0;
+    }
+    for(int i=0;i<circuite.length();i++){
+        float distance = sqrt(pow(circuite.at(i).at(0)-rightSensorPos.x,2)+pow(circuite.at(i).at(2)-rightSensorPos.z,2));
+        if(distance<threshold){
+            rightWheel = 0;
+            break;
         }
-
-        /*
-            Ecuacion de la recta perpendicular que pasa por un punto
-            z-z1 = -1/m * x - x1
-        */
-        /*
-            Calculo para saber a que lado de la recta esta un punto
-            (x0,z0) es el punto que queremos saber a que lado de la recta esta situado
-            d = (z2-z1)*x0 + (x1-x2)*z0 + (x2*z1-z2*x1)
-            d=0 pertenece
-            d>0 derecha
-            d<0 izquierda
-            sentido p1--->p2
-        */
-        float nuevaRectaPunto1X = 0;
-        float nuevaRectaPunto1Z;
-        float nuevaRectaPunto2X;
-        float nuevaRectaPunto2Z = 0;
-        // ecuacion de la recta perpendicular : z - circuite.at(i+1).at(2) = -1/m * x - circuite.at(i+1).at(0);
-        nuevaRectaPunto1Z = -1/m * nuevaRectaPunto1X - circuite.at(i+1).at(0) + circuite.at(i+1).at(2) ;
-        nuevaRectaPunto2X = (nuevaRectaPunto2Z - circuite.at(i+1).at(2) + circuite.at(i+1).at(0))/(-1/m);
-        float dRectaAntigua = (nuevaRectaPunto2Z - nuevaRectaPunto1Z)*circuite.at(i).at(0) + (nuevaRectaPunto1X - nuevaRectaPunto2X)*circuite.at(i).at(2)+(nuevaRectaPunto2X*nuevaRectaPunto1Z - nuevaRectaPunto2Z*nuevaRectaPunto1X);
-        float dNuevo = (nuevaRectaPunto2Z - nuevaRectaPunto1Z)*x + (nuevaRectaPunto1X - nuevaRectaPunto2X)*(moveSensorZ-1)+(nuevaRectaPunto2X*nuevaRectaPunto1Z - nuevaRectaPunto2Z*nuevaRectaPunto1X);
-        if(dRectaAntigua>0 && dNuevo<0){
-            i++;
-        }else if(dRectaAntigua<0 && dNuevo>0){
-            i++;
-        }
+    }
 }
 
 void GLWidget::setWheelSpeed(GLdouble speed){
@@ -304,7 +168,6 @@ void GLWidget::setSensorPosition(GLdouble separation,GLdouble distance){
 void GLWidget::setRobotSize(GLdouble width, GLdouble high){
     robotWidth = width;
     robotHigh = high;
-    //sensorZ = -robotDiameter/2.0f;
 }
 
 void GLWidget::setWheelPosition(GLdouble dToWheel){
@@ -375,7 +238,7 @@ void GLWidget::setCircuite(QString circuite){
 
 void GLWidget::startRace(){
     sensorZ = sensorDistance + distanceToWheels;
-    leftSensorPos = glm::vec4 (circuite.at(0).at(0)+leftSensorX,0,circuite.at(0).at(2)-sensorZ,1);
-    rightSensorPos = glm::vec4 (circuite.at(0).at(0)+rightSensorX,0,circuite.at(0).at(2)-sensorZ,1);
+    leftSensorVector = glm::vec4 (leftSensorX,0,-sensorZ,1);
+    rightSensorVector = glm::vec4 (rightSensorX,0,-sensorZ,1);
     start= true;
 }
