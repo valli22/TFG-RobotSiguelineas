@@ -8,14 +8,16 @@
 #include <qlist.h>
 #include <QFile>
 #include <QDebug>
+#include <mainwindow.h>
 
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
 {
 
     start = false;
-
-    dt = 0.05f;
+    totalTime = 0.0f;
+    //dt = 0.0165f;
+    dt = 0.5;
 
     threshold = 0.15;
 
@@ -23,11 +25,8 @@ GLWidget::GLWidget(QWidget *parent):
 }
 
 void GLWidget::initializeGL(){
-    glClearColor(0.2,0.2,0.2,1);
+    glClearColor(1,1,1,1);
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_LIGHTING);
-
 }
 
 void GLWidget::paintGL(){
@@ -35,10 +34,10 @@ void GLWidget::paintGL(){
 
     glMatrixMode(GL_MODELVIEW);
 
-
-
     if(start){
-
+        totalTime+=dt;
+        QString s = QString::number((int)totalTime);
+        uiWindow->setTimer(s+"s");
         glLoadIdentity();
         glm::vec3 cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
         glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
@@ -73,7 +72,6 @@ void GLWidget::paintGL(){
 
         rightWheel = wheelSpeed;
         leftWheel = wheelSpeed;
-
     }
 
     update();
@@ -85,16 +83,20 @@ void GLWidget::resizeGL(int w, int h){
     glMatrixMode(GL_PROJECTION);
 
     glLoadIdentity();
+    if(start){
+        GLdouble aspect = w / h;
+        const GLdouble zNear = 1.0;
+        const GLdouble zFar = 50.0;
 
-    GLdouble aspect = w / h;
-    const GLdouble zNear = 1.0;
-    const GLdouble zFar = 50.0;
+        if(isPerspective){
+            projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
+        }else{
+            projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
+        }
+        const float *projectionM = (const float*)glm::value_ptr(projection);
 
-    projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
-
-    const float *projectionM = (const float*)glm::value_ptr(projection);
-
-    glLoadMatrixf(projectionM);
+        glLoadMatrixf(projectionM);
+    }
 
 }
 
@@ -109,20 +111,22 @@ void GLWidget::drawCircuite()
 }
 
 void GLWidget::drawRobot(){
-
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
+        glColor3f(0.0f,0.0f,0.0f);
         glutSolidCube(0.05);
     glPopMatrix();
 
     //Sensor izquierdo
     glPushMatrix();
         glTranslatef(leftSensorX,0,-sensorZ);
+        glColor3f(0.0f,0.0f,0.0f);
         glutSolidCube(0.05);
     glPopMatrix();
 
     glTranslatef(0,0,((robotHigh/2)-distanceToWheels));
     glScalef(robotWidth,0.5,robotHigh);
+    glColor3f(0.0f,0.0f,0.0f);
     glutSolidCube(1.0f);
 
 }
@@ -178,7 +182,7 @@ void GLWidget::setCircuite(QString circuite){
     QString path = circuite;
 
     if(path==""){
-        path = "F:\\TFG\\Git\\TFG-RobotSiguelineas\\Circuitos\\circuito2.txt";
+        path = "F:\\TFG\\Git\\TFG-RobotSiguelineas\\Circuitos\\circuitoDerecha.txt";
     }
 
     QFile file(path);
@@ -221,8 +225,8 @@ void GLWidget::setCircuite(QString circuite){
         high = top-bottom;
     }
 
-    //Mediante trigonometria se calcula la altura que deberia tener la camara para que viera todo el circuito y se le añade un poco de margen
-    cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180));
+    //Mediante trigonometria se calcula la altura que deberia tener la camara para que viera todo el circuito
+    cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180)+1);
 
     cameraPosCircuite<<(bottom+top)/2;
 
@@ -236,9 +240,17 @@ void GLWidget::setCircuite(QString circuite){
     rot = 0.0f;
 }
 
-void GLWidget::startRace(){
+void GLWidget::setCameraType(bool perspectiveCamera){
+    isPerspective = perspectiveCamera;
+}
+
+void GLWidget::startRace(MainWindow *mWindow){
     sensorZ = sensorDistance + distanceToWheels;
     leftSensorVector = glm::vec4 (leftSensorX,0,-sensorZ,1);
     rightSensorVector = glm::vec4 (rightSensorX,0,-sensorZ,1);
+    totalTime = 0;
+    uiWindow = mWindow;
     start= true;
+    this->resize(this->width()+1,this->height()+1);
+    this->resize(this->width()-1,this->height()-1);
 }

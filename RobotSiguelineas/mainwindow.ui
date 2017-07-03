@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1145</width>
-    <height>495</height>
+    <height>634</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -144,6 +144,30 @@
        </layout>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="CameraTypeHorizontalLayout">
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QRadioButton" name="perspectiveRadioButton">
+          <property name="text">
+           <string>Perspective</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="orthogonalRadioButton">
+          <property name="text">
+           <string>Orthogonal</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
        <widget class="QLabel" name="circuitePathLabel">
         <property name="text">
          <string>Circuite path</string>
@@ -153,7 +177,7 @@
       <item>
        <widget class="QPlainTextEdit" name="circuitePath">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
           <verstretch>1</verstretch>
          </sizepolicy>
@@ -161,9 +185,21 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QLabel" name="timeTittleLabel">
         <property name="text">
-         <string>Insert Parameters</string>
+         <string>Time</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="timeLabel">
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -172,13 +208,23 @@
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>20</width>
-          <height>40</height>
+          <height>50</height>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="text">
+         <string>Insert Parameters</string>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton">
@@ -191,6 +237,9 @@
     </item>
     <item row="0" column="0">
      <widget class="GLWidget" name="widget" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
         <horstretch>0</horstretch>

@@ -21,6 +21,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -54,10 +55,15 @@ public:
     QHBoxLayout *RobotSizeHorizontalLayout;
     QDoubleSpinBox *robotHigh;
     QDoubleSpinBox *robotWidth;
+    QHBoxLayout *CameraTypeHorizontalLayout;
+    QRadioButton *perspectiveRadioButton;
+    QRadioButton *orthogonalRadioButton;
     QLabel *circuitePathLabel;
     QPlainTextEdit *circuitePath;
-    QPushButton *pushButton_2;
+    QLabel *timeTittleLabel;
+    QLabel *timeLabel;
     QSpacerItem *verticalSpacer;
+    QPushButton *pushButton_2;
     QPushButton *pushButton;
     GLWidget *widget;
 
@@ -66,7 +72,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setWindowModality(Qt::ApplicationModal);
-        MainWindow->resize(1145, 495);
+        MainWindow->resize(1145, 634);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -188,6 +194,24 @@ public:
 
         verticalLayout->addLayout(RobotSizeHorizontalLayout);
 
+        CameraTypeHorizontalLayout = new QHBoxLayout();
+        CameraTypeHorizontalLayout->setSpacing(6);
+        CameraTypeHorizontalLayout->setObjectName(QStringLiteral("CameraTypeHorizontalLayout"));
+        CameraTypeHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
+        perspectiveRadioButton = new QRadioButton(centralWidget);
+        perspectiveRadioButton->setObjectName(QStringLiteral("perspectiveRadioButton"));
+        perspectiveRadioButton->setChecked(true);
+
+        CameraTypeHorizontalLayout->addWidget(perspectiveRadioButton);
+
+        orthogonalRadioButton = new QRadioButton(centralWidget);
+        orthogonalRadioButton->setObjectName(QStringLiteral("orthogonalRadioButton"));
+
+        CameraTypeHorizontalLayout->addWidget(orthogonalRadioButton);
+
+
+        verticalLayout->addLayout(CameraTypeHorizontalLayout);
+
         circuitePathLabel = new QLabel(centralWidget);
         circuitePathLabel->setObjectName(QStringLiteral("circuitePathLabel"));
 
@@ -195,7 +219,7 @@ public:
 
         circuitePath = new QPlainTextEdit(centralWidget);
         circuitePath->setObjectName(QStringLiteral("circuitePath"));
-        QSizePolicy sizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(1);
         sizePolicy.setHeightForWidth(circuitePath->sizePolicy().hasHeightForWidth());
@@ -203,14 +227,27 @@ public:
 
         verticalLayout->addWidget(circuitePath);
 
+        timeTittleLabel = new QLabel(centralWidget);
+        timeTittleLabel->setObjectName(QStringLiteral("timeTittleLabel"));
+
+        verticalLayout->addWidget(timeTittleLabel);
+
+        timeLabel = new QLabel(centralWidget);
+        timeLabel->setObjectName(QStringLiteral("timeLabel"));
+        QFont font;
+        font.setPointSize(20);
+        timeLabel->setFont(font);
+
+        verticalLayout->addWidget(timeLabel);
+
+        verticalSpacer = new QSpacerItem(20, 50, QSizePolicy::Minimum, QSizePolicy::Fixed);
+
+        verticalLayout->addItem(verticalSpacer);
+
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
         verticalLayout->addWidget(pushButton_2);
-
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout->addItem(verticalSpacer);
 
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
@@ -222,6 +259,7 @@ public:
 
         widget = new GLWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
+        widget->setEnabled(true);
         QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -249,7 +287,11 @@ public:
         sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
         robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high", Q_NULLPTR));
         robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width", Q_NULLPTR));
+        perspectiveRadioButton->setText(QApplication::translate("MainWindow", "Perspective", Q_NULLPTR));
+        orthogonalRadioButton->setText(QApplication::translate("MainWindow", "Orthogonal", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
+        timeTittleLabel->setText(QApplication::translate("MainWindow", "Time", Q_NULLPTR));
+        timeLabel->setText(QString());
         pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi

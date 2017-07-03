@@ -3,6 +3,8 @@
 
 #include <QOpenGLWidget>
 #include "glm/gtc/matrix_transform.hpp"
+#include <QMainWindow>
+#include <mainwindow.h>
 
 class GLWidget : public QOpenGLWidget
 {
@@ -20,7 +22,8 @@ public:
     void setRobotSize(GLdouble width, GLdouble high);
     void setWheelPosition(GLdouble dToWheel);
     void setCircuite(QString circuite);
-    void startRace();
+    void setCameraType(bool perspectiveCamera);
+    void startRace(MainWindow *mWindow);
 
 private:
 
@@ -71,6 +74,9 @@ private:
     //FOV de la camara
     const GLdouble fov = 75.0;
 
+    //Tipo de camara
+    bool isPerspective;
+
     //Posicion de la camara que se posicionara segun la posicion del circuito
     QList<float> cameraPosCircuite;
 
@@ -87,6 +93,10 @@ private:
     glm::mat4 projection;
     glm::mat4 view;
     glm::mat4 model;
+
+    //Tiempo total
+    float totalTime;
+    MainWindow *uiWindow;
 
     //void keyPressEvent(QKeyEvent *event);
     void drawCircuite();
