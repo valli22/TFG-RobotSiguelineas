@@ -5,6 +5,7 @@
 #include "glm/gtc/matrix_transform.hpp"
 #include <QMainWindow>
 #include <mainwindow.h>
+#include <QTimer>
 
 class GLWidget : public QOpenGLWidget
 {
@@ -96,7 +97,10 @@ private:
 
     //Tiempo total
     float totalTime;
+    int sleepValue;
     MainWindow *uiWindow;
+
+    QTimer timer;
 
     //void keyPressEvent(QKeyEvent *event);
     void drawCircuite();

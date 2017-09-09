@@ -13,20 +13,19 @@
 GLWidget::GLWidget(QWidget *parent):
         QOpenGLWidget(parent)
 {
-
     start = false;
     totalTime = 0.0f;
-    //dt = 0.0165f;
-    dt = 0.5;
+    sleepValue = 10;
+    dt = 0.1;
 
     threshold = 0.15;
 
-    setFocusPolicy(Qt::StrongFocus);
+    connect(&timer, SIGNAL(timeout()),this,SLOT(update()));
+    timer.start(sleepValue);
 }
 
 void GLWidget::initializeGL(){
     glClearColor(1,1,1,1);
-    glEnable(GL_DEPTH_TEST);
 }
 
 void GLWidget::paintGL(){
@@ -35,7 +34,7 @@ void GLWidget::paintGL(){
     glMatrixMode(GL_MODELVIEW);
 
     if(start){
-        totalTime+=dt;
+        totalTime+=sleepValue/1000.0f;
         QString s = QString::number((int)totalTime);
         uiWindow->setTimer(s+"s");
         glLoadIdentity();
@@ -52,6 +51,7 @@ void GLWidget::paintGL(){
         drawCircuite();
 
         movementController();
+
         x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
         z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
@@ -74,7 +74,7 @@ void GLWidget::paintGL(){
         leftWheel = wheelSpeed;
     }
 
-    update();
+    //update();
 }
 
 void GLWidget::resizeGL(int w, int h){
@@ -110,7 +110,7 @@ void GLWidget::drawCircuite()
     glEnd();
 }
 
-void GLWidget::drawRobot(){
+void GLWidget:: drawRobot(){
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
         glColor3f(0.0f,0.0f,0.0f);
@@ -248,6 +248,8 @@ void GLWidget::startRace(MainWindow *mWindow){
     sensorZ = sensorDistance + distanceToWheels;
     leftSensorVector = glm::vec4 (leftSensorX,0,-sensorZ,1);
     rightSensorVector = glm::vec4 (rightSensorX,0,-sensorZ,1);
+    leftSensorPos = leftSensorVector;
+    rightSensorPos = rightSensorVector;
     totalTime = 0;
     uiWindow = mWindow;
     start= true;

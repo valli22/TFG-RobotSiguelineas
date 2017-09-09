@@ -13,7 +13,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_insertParameters_clicked()
 {
     GLdouble wheelSpeed, wheelRadius, wheelSeparation, sensorSeparation, sensorDistance, robotHigh, robotWidth,distanceToWheels;
     QString circuitePath = "";

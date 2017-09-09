@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1145</width>
-    <height>634</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,40 @@
        <widget class="QDoubleSpinBox" name="distanceToWheels"/>
       </item>
       <item>
+       <layout class="QHBoxLayout" name="RobotSizeLabelHorizontalLayout">
+        <property name="bottomMargin">
+         <number>3</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="robotHighLabel">
+          <property name="text">
+           <string>Robot high</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="robotWidthLabel">
+          <property name="text">
+           <string>Robot width</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="RobotSizeHorizontalLayout">
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QDoubleSpinBox" name="robotHigh"/>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="robotWidth"/>
+        </item>
+       </layout>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="SensorLabelHorizontalLayout">
         <property name="leftMargin">
          <number>0</number>
@@ -106,40 +140,6 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="sensorSeparation"/>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="RobotSizeLabelHorizontalLayout">
-        <property name="bottomMargin">
-         <number>3</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="robotHighLabel">
-          <property name="text">
-           <string>Robot high</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="robotWidthLabel">
-          <property name="text">
-           <string>Robot width</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="RobotSizeHorizontalLayout">
-        <property name="bottomMargin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QDoubleSpinBox" name="robotHigh"/>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="robotWidth"/>
         </item>
        </layout>
       </item>
@@ -220,14 +220,14 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="insertParameters">
         <property name="text">
          <string>Insert Parameters</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="quit">
         <property name="text">
          <string>&amp;Quit</string>
         </property>
@@ -263,7 +263,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>quit</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>

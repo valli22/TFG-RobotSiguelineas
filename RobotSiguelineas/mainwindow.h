@@ -17,7 +17,7 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
+    void on_insertParameters_clicked();
 
 private:
     Ui::MainWindow *ui;
