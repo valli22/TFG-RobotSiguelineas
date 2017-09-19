@@ -43,18 +43,18 @@ public:
     QDoubleSpinBox *wheelSeparation;
     QLabel *distanceToWheelsLabel;
     QDoubleSpinBox *distanceToWheels;
-    QHBoxLayout *SensorLabelHorizontalLayout;
-    QLabel *sensorDistanceLabel;
-    QLabel *sensorSeparationLabel;
-    QHBoxLayout *SensorHorizontalLayout;
-    QDoubleSpinBox *sensorDistance;
-    QDoubleSpinBox *sensorSeparation;
     QHBoxLayout *RobotSizeLabelHorizontalLayout;
     QLabel *robotHighLabel;
     QLabel *robotWidthLabel;
     QHBoxLayout *RobotSizeHorizontalLayout;
     QDoubleSpinBox *robotHigh;
     QDoubleSpinBox *robotWidth;
+    QHBoxLayout *SensorLabelHorizontalLayout;
+    QLabel *sensorDistanceLabel;
+    QLabel *sensorSeparationLabel;
+    QHBoxLayout *SensorHorizontalLayout;
+    QDoubleSpinBox *sensorDistance;
+    QDoubleSpinBox *sensorSeparation;
     QHBoxLayout *CameraTypeHorizontalLayout;
     QRadioButton *perspectiveRadioButton;
     QRadioButton *orthogonalRadioButton;
@@ -63,8 +63,8 @@ public:
     QLabel *timeTittleLabel;
     QLabel *timeLabel;
     QSpacerItem *verticalSpacer;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton;
+    QPushButton *insertParameters;
+    QPushButton *quit;
     GLWidget *widget;
 
     void setupUi(QMainWindow *MainWindow)
@@ -72,7 +72,7 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setWindowModality(Qt::ApplicationModal);
-        MainWindow->resize(1145, 634);
+        MainWindow->resize(1145, 710);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -126,40 +126,6 @@ public:
 
         verticalLayout->addWidget(distanceToWheels);
 
-        SensorLabelHorizontalLayout = new QHBoxLayout();
-        SensorLabelHorizontalLayout->setSpacing(6);
-        SensorLabelHorizontalLayout->setObjectName(QStringLiteral("SensorLabelHorizontalLayout"));
-        SensorLabelHorizontalLayout->setContentsMargins(0, -1, -1, 3);
-        sensorDistanceLabel = new QLabel(centralWidget);
-        sensorDistanceLabel->setObjectName(QStringLiteral("sensorDistanceLabel"));
-
-        SensorLabelHorizontalLayout->addWidget(sensorDistanceLabel);
-
-        sensorSeparationLabel = new QLabel(centralWidget);
-        sensorSeparationLabel->setObjectName(QStringLiteral("sensorSeparationLabel"));
-
-        SensorLabelHorizontalLayout->addWidget(sensorSeparationLabel);
-
-
-        verticalLayout->addLayout(SensorLabelHorizontalLayout);
-
-        SensorHorizontalLayout = new QHBoxLayout();
-        SensorHorizontalLayout->setSpacing(6);
-        SensorHorizontalLayout->setObjectName(QStringLiteral("SensorHorizontalLayout"));
-        SensorHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
-        sensorDistance = new QDoubleSpinBox(centralWidget);
-        sensorDistance->setObjectName(QStringLiteral("sensorDistance"));
-
-        SensorHorizontalLayout->addWidget(sensorDistance);
-
-        sensorSeparation = new QDoubleSpinBox(centralWidget);
-        sensorSeparation->setObjectName(QStringLiteral("sensorSeparation"));
-
-        SensorHorizontalLayout->addWidget(sensorSeparation);
-
-
-        verticalLayout->addLayout(SensorHorizontalLayout);
-
         RobotSizeLabelHorizontalLayout = new QHBoxLayout();
         RobotSizeLabelHorizontalLayout->setSpacing(6);
         RobotSizeLabelHorizontalLayout->setObjectName(QStringLiteral("RobotSizeLabelHorizontalLayout"));
@@ -193,6 +159,40 @@ public:
 
 
         verticalLayout->addLayout(RobotSizeHorizontalLayout);
+
+        SensorLabelHorizontalLayout = new QHBoxLayout();
+        SensorLabelHorizontalLayout->setSpacing(6);
+        SensorLabelHorizontalLayout->setObjectName(QStringLiteral("SensorLabelHorizontalLayout"));
+        SensorLabelHorizontalLayout->setContentsMargins(0, -1, -1, 3);
+        sensorDistanceLabel = new QLabel(centralWidget);
+        sensorDistanceLabel->setObjectName(QStringLiteral("sensorDistanceLabel"));
+
+        SensorLabelHorizontalLayout->addWidget(sensorDistanceLabel);
+
+        sensorSeparationLabel = new QLabel(centralWidget);
+        sensorSeparationLabel->setObjectName(QStringLiteral("sensorSeparationLabel"));
+
+        SensorLabelHorizontalLayout->addWidget(sensorSeparationLabel);
+
+
+        verticalLayout->addLayout(SensorLabelHorizontalLayout);
+
+        SensorHorizontalLayout = new QHBoxLayout();
+        SensorHorizontalLayout->setSpacing(6);
+        SensorHorizontalLayout->setObjectName(QStringLiteral("SensorHorizontalLayout"));
+        SensorHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
+        sensorDistance = new QDoubleSpinBox(centralWidget);
+        sensorDistance->setObjectName(QStringLiteral("sensorDistance"));
+
+        SensorHorizontalLayout->addWidget(sensorDistance);
+
+        sensorSeparation = new QDoubleSpinBox(centralWidget);
+        sensorSeparation->setObjectName(QStringLiteral("sensorSeparation"));
+
+        SensorHorizontalLayout->addWidget(sensorSeparation);
+
+
+        verticalLayout->addLayout(SensorHorizontalLayout);
 
         CameraTypeHorizontalLayout = new QHBoxLayout();
         CameraTypeHorizontalLayout->setSpacing(6);
@@ -244,15 +244,15 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        insertParameters = new QPushButton(centralWidget);
+        insertParameters->setObjectName(QStringLiteral("insertParameters"));
 
-        verticalLayout->addWidget(pushButton_2);
+        verticalLayout->addWidget(insertParameters);
 
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
+        quit = new QPushButton(centralWidget);
+        quit->setObjectName(QStringLiteral("quit"));
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout->addWidget(quit);
 
 
         gridLayout->addLayout(verticalLayout, 0, 1, 1, 1);
@@ -271,7 +271,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
 
         retranslateUi(MainWindow);
-        QObject::connect(pushButton, SIGNAL(clicked()), MainWindow, SLOT(close()));
+        QObject::connect(quit, SIGNAL(clicked()), MainWindow, SLOT(close()));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -283,17 +283,17 @@ public:
         wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius", Q_NULLPTR));
         wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
         distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels", Q_NULLPTR));
-        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance", Q_NULLPTR));
-        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
         robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high", Q_NULLPTR));
         robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width", Q_NULLPTR));
+        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance", Q_NULLPTR));
+        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
         perspectiveRadioButton->setText(QApplication::translate("MainWindow", "Perspective", Q_NULLPTR));
         orthogonalRadioButton->setText(QApplication::translate("MainWindow", "Orthogonal", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
         timeTittleLabel->setText(QApplication::translate("MainWindow", "Time", Q_NULLPTR));
         timeLabel->setText(QString());
-        pushButton_2->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
+        insertParameters->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
+        quit->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
     } // retranslateUi
 
 };
