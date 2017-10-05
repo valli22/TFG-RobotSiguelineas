@@ -15,10 +15,10 @@ GLWidget::GLWidget(QWidget *parent):
 {
     start = false;
     totalTime = 0.0f;
-    sleepValue = 10;
-    dt = 0.1;
+    sleepValue = 20;
+    dt = 0.01;
 
-    threshold = 0.15;
+    threshold = 0.3;
 
     connect(&timer, SIGNAL(timeout()),this,SLOT(update()));
     timer.start(sleepValue);
@@ -34,7 +34,7 @@ void GLWidget::paintGL(){
     glMatrixMode(GL_MODELVIEW);
 
     if(start){
-        totalTime+=sleepValue/1000.0f;
+        totalTime+=dt;
         QString s = QString::number((int)totalTime);
         uiWindow->setTimer(s+"s");
         glLoadIdentity();
@@ -52,12 +52,12 @@ void GLWidget::paintGL(){
 
         movementController();
 
-        x -= (rightWheel + leftWheel) * ((wheelRadius * qSin(rot*M_PI/180))/2) * dt;
-        z -= (rightWheel + leftWheel) * ((wheelRadius * qCos(rot*M_PI/180))/2) * dt;
+        x -= (rightWheel + leftWheel) * (wheelRadius * qSin(rot)/2) * dt;
+        z -= (rightWheel + leftWheel) * (wheelRadius * qCos(rot)/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
 
         model = glm::translate(glm::mat4(1.0),glm::vec3(x,0.0f,z));
-        model = glm::rotate(model,(float)((rot*M_PI)/180),glm::vec3(0.0f,1.0f,0.0f));
+        model = glm::rotate(model,(float)(rot),glm::vec3(0.0f,1.0f,0.0f));
 
         //mat4xvec4 vec4 is consider column
         //vec4xmat4 vec4 is consider row
@@ -86,7 +86,7 @@ void GLWidget::resizeGL(int w, int h){
     if(start){
         GLdouble aspect = w / h;
         const GLdouble zNear = 1.0;
-        const GLdouble zFar = 50.0;
+        const GLdouble zFar = 200.0;
 
         if(isPerspective){
             projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
@@ -111,23 +111,26 @@ void GLWidget::drawCircuite()
 }
 
 void GLWidget:: drawRobot(){
+    //Sensor derecho
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
         glColor3f(0.0f,0.0f,0.0f);
-        glutSolidCube(0.05);
+        glutSolidCube(0.5);
     glPopMatrix();
 
     //Sensor izquierdo
     glPushMatrix();
         glTranslatef(leftSensorX,0,-sensorZ);
         glColor3f(0.0f,0.0f,0.0f);
-        glutSolidCube(0.05);
+        glutSolidCube(0.5);
     glPopMatrix();
 
-    glTranslatef(0,0,((robotHigh/2)-distanceToWheels));
-    glScalef(robotWidth,0.5,robotHigh);
-    glColor3f(0.0f,0.0f,0.0f);
-    glutSolidCube(1.0f);
+    glPushMatrix();
+        glTranslatef(0,0,((robotHigh/2)-distanceToWheels));
+        glScalef(robotWidth,0.5,robotHigh);
+        glColor3f(0.0f,0.0f,0.0f);
+        glutSolidCube(1.0f);
+    glPopMatrix();
 
 }
 
@@ -182,7 +185,7 @@ void GLWidget::setCircuite(QString circuite){
     QString path = circuite;
 
     if(path==""){
-        path = "F:\\TFG\\Git\\TFG-RobotSiguelineas\\Circuitos\\circuitoDerecha.txt";
+        path = "C:\\GitHub\\TFG\\TFG-RobotSiguelineas\\Circuitos\\circuito.txt";
     }
 
     QFile file(path);
@@ -194,7 +197,7 @@ void GLWidget::setCircuite(QString circuite){
         QList<float> vertex;
         QString line = file.readLine();
         line.replace(',','.');
-        int index = line.indexOf('.',2);
+        int index = line.indexOf('.',4);
         line.replace(index,1,' ');
         QStringList points = line.split(' ');
         vertex<<points.at(0).toFloat()<<0<<points.at(1).toFloat();
@@ -226,7 +229,7 @@ void GLWidget::setCircuite(QString circuite){
     }
 
     //Mediante trigonometria se calcula la altura que deberia tener la camara para que viera todo el circuito
-    cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180)+1);
+    cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180)+15);
 
     cameraPosCircuite<<(bottom+top)/2;
 

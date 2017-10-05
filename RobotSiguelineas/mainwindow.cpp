@@ -29,17 +29,17 @@ void MainWindow::on_insertParameters_clicked()
     circuitePath = ui->circuitePath->toPlainText();
 
     if(wheelSpeed==0 && wheelRadius==0 && wheelSeparation==0 && sensorSeparation==0 && robotHigh==0 && robotWidth==0 && distanceToWheels==0 && sensorDistance==0){
-        ui->widget->setWheelSpeed(0.1);
-        ui->widget->setWheelRadius(1);
-        ui->widget->setWheelSeparation(0.01);
-        ui->widget->setSensorPosition(0.5,0.2);
-        ui->widget->setRobotSize(0.3,0.5);
+        ui->widget->setWheelSpeed(2*2*M_PI);
+        ui->widget->setWheelRadius(2);
+        ui->widget->setWheelSeparation(16);
+        ui->widget->setSensorPosition(4,0);
+        ui->widget->setRobotSize(16,22);
         ui->widget->setCameraType(ui->perspectiveRadioButton->isChecked());
         ui->widget->setCircuite(circuitePath);
-        ui->widget->setWheelPosition(0.1);
+        ui->widget->setWheelPosition(3);
 
     }else{
-        ui->widget->setWheelSpeed(wheelSpeed);
+        ui->widget->setWheelSpeed(wheelSpeed*2*M_PI);
         ui->widget->setWheelRadius(wheelRadius);
         ui->widget->setWheelSeparation(wheelSeparation);
         ui->widget->setSensorPosition(sensorSeparation,sensorDistance);
