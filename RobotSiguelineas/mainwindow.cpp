@@ -6,6 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    photoHigh = ui->robotPhoto->height();
+    photoWidth = ui->robotPhoto->width();
 }
 
 MainWindow::~MainWindow()
@@ -54,4 +56,15 @@ void MainWindow::on_insertParameters_clicked()
 }
 void MainWindow::setTimer(QString totalTime){
     ui->timeLabel->setText(totalTime);
+}
+
+void MainWindow::on_showRobotCheckBox_clicked()
+{
+    if(ui->showRobotCheckBox->isChecked()){
+        ui->robotPhoto->setFixedHeight(photoHigh);
+        ui->robotPhoto->setFixedWidth(photoWidth);
+    }else{
+        ui->robotPhoto->setFixedWidth(0);
+        ui->robotPhoto->setFixedHeight(0);
+    }
 }

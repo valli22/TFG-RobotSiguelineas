@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1145</width>
-    <height>710</height>
+    <height>733</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,7 +45,7 @@
       <item>
        <widget class="QLabel" name="wheelRadiusLabel">
         <property name="text">
-         <string>Wheel radius</string>
+         <string>Wheel radius - WR</string>
         </property>
        </widget>
       </item>
@@ -55,7 +55,7 @@
       <item>
        <widget class="QLabel" name="wheelSeparationLabel">
         <property name="text">
-         <string>Wheel separation</string>
+         <string>Wheel separation - WS</string>
         </property>
        </widget>
       </item>
@@ -65,7 +65,7 @@
       <item>
        <widget class="QLabel" name="distanceToWheelsLabel">
         <property name="text">
-         <string>Distance to wheels</string>
+         <string>Distance to wheels - WD</string>
         </property>
        </widget>
       </item>
@@ -80,14 +80,14 @@
         <item>
          <widget class="QLabel" name="robotHighLabel">
           <property name="text">
-           <string>Robot high</string>
+           <string>Robot high - L</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="robotWidthLabel">
           <property name="text">
-           <string>Robot width</string>
+           <string>Robot width - A</string>
           </property>
          </widget>
         </item>
@@ -117,14 +117,14 @@
         <item>
          <widget class="QLabel" name="sensorDistanceLabel">
           <property name="text">
-           <string>Sensor distance</string>
+           <string>Sensor distance - SD</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="sensorSeparationLabel">
           <property name="text">
-           <string>Sensor separation</string>
+           <string>Sensor separation - SS</string>
           </property>
          </widget>
         </item>
@@ -177,10 +177,20 @@
       <item>
        <widget class="QPlainTextEdit" name="circuitePath">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
           <horstretch>0</horstretch>
-          <verstretch>1</verstretch>
+          <verstretch>190</verstretch>
          </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="showRobotCheckBox">
+        <property name="text">
+         <string>Show robot image</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -246,6 +256,28 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <widget class="QLabel" name="robotPhoto">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>10</y>
+         <width>401</width>
+         <height>501</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap>Robot.jpg</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>false</bool>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>

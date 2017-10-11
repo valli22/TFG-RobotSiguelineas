@@ -91,7 +91,8 @@ void GLWidget::resizeGL(int w, int h){
         if(isPerspective){
             projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
         }else{
-            projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
+            //projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
+              projection = glm::ortho((double)-h*aspect,(double)h*aspect,(double)-h,(double)h,(double)zNear,(double)zFar);
         }
         const float *projectionM = (const float*)glm::value_ptr(projection);
 

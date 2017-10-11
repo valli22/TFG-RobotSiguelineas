@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDoubleSpinBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -60,19 +61,21 @@ public:
     QRadioButton *orthogonalRadioButton;
     QLabel *circuitePathLabel;
     QPlainTextEdit *circuitePath;
+    QCheckBox *showRobotCheckBox;
     QLabel *timeTittleLabel;
     QLabel *timeLabel;
     QSpacerItem *verticalSpacer;
     QPushButton *insertParameters;
     QPushButton *quit;
     GLWidget *widget;
+    QLabel *robotPhoto;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setWindowModality(Qt::ApplicationModal);
-        MainWindow->resize(1145, 710);
+        MainWindow->resize(1145, 733);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -219,13 +222,19 @@ public:
 
         circuitePath = new QPlainTextEdit(centralWidget);
         circuitePath->setObjectName(QStringLiteral("circuitePath"));
-        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(1);
+        sizePolicy.setVerticalStretch(190);
         sizePolicy.setHeightForWidth(circuitePath->sizePolicy().hasHeightForWidth());
         circuitePath->setSizePolicy(sizePolicy);
 
         verticalLayout->addWidget(circuitePath);
+
+        showRobotCheckBox = new QCheckBox(centralWidget);
+        showRobotCheckBox->setObjectName(QStringLiteral("showRobotCheckBox"));
+        showRobotCheckBox->setChecked(true);
+
+        verticalLayout->addWidget(showRobotCheckBox);
 
         timeTittleLabel = new QLabel(centralWidget);
         timeTittleLabel->setObjectName(QStringLiteral("timeTittleLabel"));
@@ -265,6 +274,12 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
         widget->setSizePolicy(sizePolicy1);
+        robotPhoto = new QLabel(widget);
+        robotPhoto->setObjectName(QStringLiteral("robotPhoto"));
+        robotPhoto->setEnabled(true);
+        robotPhoto->setGeometry(QRect(450, 10, 401, 501));
+        robotPhoto->setPixmap(QPixmap(QString::fromUtf8("Robot.jpg")));
+        robotPhoto->setScaledContents(false);
 
         gridLayout->addWidget(widget, 0, 0, 1, 1);
 
@@ -280,20 +295,22 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Robot Siguelineas", Q_NULLPTR));
         wheelSpeedLabel->setText(QApplication::translate("MainWindow", "Wheel speed", Q_NULLPTR));
-        wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius", Q_NULLPTR));
-        wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation", Q_NULLPTR));
-        distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels", Q_NULLPTR));
-        robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high", Q_NULLPTR));
-        robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width", Q_NULLPTR));
-        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance", Q_NULLPTR));
-        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation", Q_NULLPTR));
+        wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius - WR", Q_NULLPTR));
+        wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation - WS", Q_NULLPTR));
+        distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels - WD", Q_NULLPTR));
+        robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high - L", Q_NULLPTR));
+        robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width - A", Q_NULLPTR));
+        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance - SD", Q_NULLPTR));
+        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation - SS", Q_NULLPTR));
         perspectiveRadioButton->setText(QApplication::translate("MainWindow", "Perspective", Q_NULLPTR));
         orthogonalRadioButton->setText(QApplication::translate("MainWindow", "Orthogonal", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
+        showRobotCheckBox->setText(QApplication::translate("MainWindow", "Show robot image", Q_NULLPTR));
         timeTittleLabel->setText(QApplication::translate("MainWindow", "Time", Q_NULLPTR));
         timeLabel->setText(QString());
         insertParameters->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         quit->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
+        robotPhoto->setText(QString());
     } // retranslateUi
 
 };

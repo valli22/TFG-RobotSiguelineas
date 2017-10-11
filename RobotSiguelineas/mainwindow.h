@@ -19,8 +19,12 @@ public:
 private slots:
     void on_insertParameters_clicked();
 
+    void on_showRobotCheckBox_clicked();
+
 private:
     Ui::MainWindow *ui;
+    float photoWidth;
+    float photoHigh;
 };
 
 #endif // MAINWINDOW_H
