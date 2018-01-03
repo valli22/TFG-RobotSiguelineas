@@ -24,7 +24,7 @@ void MainWindow::on_insertParameters_clicked()
     wheelRadius = ui->wheelRadius->value();
     wheelSeparation = ui->wheelSeparation->value();
     sensorSeparation = ui->sensorSeparation->value();
-    sensorDistance = ui->sensorSeparation->value();
+    sensorDistance = ui->sensorDistance->value();
     robotHigh = ui -> robotHigh ->value();
     robotWidth = ui->robotWidth->value();
     distanceToWheels = ui->distanceToWheels->value();

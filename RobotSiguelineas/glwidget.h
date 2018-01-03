@@ -106,6 +106,12 @@ private:
     void drawCircuite();
     void drawRobot();
     void movementController();
+    void drawCuerpo();
+    void drawRuedasDelanteras();
+    void drawRuedaTrasera();
+    void drawSensores();
+    void drawRuedaDelantera();
+    void drawSensor();
 };
 
 #endif // GLWIDGET_H

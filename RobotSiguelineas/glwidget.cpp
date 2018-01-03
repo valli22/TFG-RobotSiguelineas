@@ -92,7 +92,8 @@ void GLWidget::resizeGL(int w, int h){
             projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
         }else{
             //projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
-              projection = glm::ortho((double)-h*aspect,(double)h*aspect,(double)-h,(double)h,(double)zNear,(double)zFar);
+            //projection = glm::ortho((double)-h*aspect,(double)h*aspect,(double)-h,(double)h,(double)zNear,(double)zFar);
+            projection = glm::ortho((-zFar/2)*w/h,(zFar/2)*w/h,-zFar/2,zFar/2,zNear,zFar);
         }
         const float *projectionM = (const float*)glm::value_ptr(projection);
 
@@ -113,6 +114,19 @@ void GLWidget::drawCircuite()
 }
 
 void GLWidget:: drawRobot(){
+
+    // Posición/orientación del robot
+       //glTranslatef(desX,0.0f,desZ);
+       //glRotatef(rotY,0.0f,1.0f,0.0f);
+
+    // Dibujo del robot
+       glRotatef(-90.0f,1.0f,0.0f,0.0f); // Como está diseñado en vertical, aquí lo pongo en horizontal
+       drawCuerpo();
+       drawRuedasDelanteras();
+       drawRuedaTrasera();
+       drawSensores();
+
+  /*
     //Sensor derecho
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
@@ -133,8 +147,124 @@ void GLWidget:: drawRobot(){
         glColor3f(0.0f,0.0f,7.0f);
         glutSolidCube(1.0f);
     glPopMatrix();
+    */
 
 }
+void GLWidget:: drawCuerpo() {
+
+ // Tornillo central negro
+    glColor3f(0.0f, 0.0f, 0.0f);
+    glutSolidSphere(1.0f,20,20);
+
+ // Plataforma
+    glPushMatrix();
+     // Redimensionamos el cubo para convertirlo en la plataforma
+        glTranslatef(0.0f,-(robotHigh/2.0f-distanceToWheels),0.0f);
+        glScalef(robotWidth,robotHigh,1.0f);
+     // Modelo solido/alambre de un cubo de lado 2
+        glColor3f(0.0f,0.0f,1.0f);
+        glutWireCube (1.0f);
+        glColor3f(1.0f,1.0f,0.0f);
+        glutSolidCube(1.0f);
+    glPopMatrix();
+
+}
+
+
+void GLWidget:: drawRuedasDelanteras() {
+
+ // Colocamos las ruedas en su sitio
+    //GLfloat distRueda = distanceToWheels/2.0f + 1.0f;
+    GLfloat distRueda = wheelSeparation/2.0f;
+    glPushMatrix();
+        glPushMatrix();
+            glTranslatef(-distRueda,0.0f,0.0f);
+            drawRuedaDelantera();
+        glPopMatrix();
+        glPushMatrix();
+            glTranslatef(distRueda,0.0f,0.0f);
+            drawRuedaDelantera();
+        glPopMatrix();
+    glPopMatrix();
+
+}
+
+void GLWidget:: drawRuedaDelantera() {
+
+    glPushMatrix();
+        //glRotatef(rotX,1.0f,0.0f,0.0f);  // Para que de la sensación de que los radios giran (se puede quitar)
+        glRotatef(90.0f,0.0f,1.0f,0.0f); // Orientamos la rueda
+     // Redimensionamos la esfera para convertirla en la rueda
+        glScalef(1.0f,1.0f,1.0f/wheelRadius);
+     // Modelo solido/alambre de una esfera de radio wheelradius
+        glColor3f(0.0f,1.0f,1.0f);
+        glutWireSphere (wheelRadius,10,5);
+        glColor3f(0.0f,0.0f,1.0f);
+        glutSolidSphere(wheelRadius,10,5);
+    glPopMatrix();
+
+}
+
+
+void GLWidget:: drawRuedaTrasera() {
+
+    glPushMatrix();
+      // Ubicamos la rueda dentro del robot
+        glTranslatef(0.0f,-(robotHigh-4.0f),-wheelRadius);
+     // Modelo solido/alambre del soporte
+        glColor3f(1.0f,1.0f,1.0f);
+        glutWireCylinder (0.2f,wheelRadius,10,5);
+        glColor3f(0.5f,0.5f,0.5f);
+        glutSolidCylinder(0.2f,wheelRadius,10,5);
+     // Modelo solido/alambre de la frueda
+        //glRotatef(rotX,1.0f,0.0f,0.0f); // Sensación de giro de los radios (se puede quitar)
+        glRotatef(90.0f,0.0f,1.0f,0.0f);
+        glScalef(1.0f, 1.0f, 0.5f);
+        glColor3f(0.5f, 0.0f, 0.0f);
+        glutWireSphere (1.0f,10,5);
+        glColor3f(0.0f, 1.0f, 0.0f);
+        glutSolidSphere(1.0f,10,5);
+    glPopMatrix();
+
+}
+
+
+void GLWidget:: drawSensores() {
+
+ // Colocamos los sensores en su sitio
+    GLfloat distSensor = sensorSeparation/2.0f;
+    glPushMatrix();
+        glPushMatrix();
+            glTranslatef(-distSensor,distanceToWheels+sensorDistance,-(wheelRadius-0.5f));
+            drawSensor();
+        glPopMatrix();
+        glPushMatrix();
+            glTranslatef(distSensor,distanceToWheels+sensorDistance, -(wheelRadius-0.5f));
+            drawSensor();
+        glPopMatrix();
+    glPopMatrix();
+
+}
+
+
+void GLWidget:: drawSensor() {
+
+ // El soporte del sensor es un modelo solido/alambre de un cilindro de longitud wheelRadius-1 y radio 0.2
+    glColor3f(1.0f,1.0f,1.0f);
+    glutWireCylinder (0.2f,wheelRadius-0.5f,10,5);
+    glColor3f(0.5f,0.5f,0.5f);
+    glutSolidCylinder(0.2f,wheelRadius-0.5f,10,5);
+
+ // El sensor es un modelo solido/alambre de un cubo de lado 2
+    glPushMatrix();
+        glColor3f(1.0f,1.0f,0.0f);
+        glutWireCube (1.0f);
+        glColor3f(1.0f,0.0f,0.0f);
+        glutSolidCube(1.0f);
+    glPopMatrix();
+
+}
+
 
 void GLWidget::movementController(){
     for(int i=0;i<circuite.length();i++){
@@ -228,6 +358,7 @@ void GLWidget::setCircuite(QString circuite){
 
     //Mediante trigonometria se calcula la altura que deberia tener la camara para que viera todo el circuito
     cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180)+15);
+    //cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180));
 
     cameraPosCircuite<<(bottom+top)/2;
 
