@@ -40,7 +40,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="wheelSpeed"/>
+       <widget class="QDoubleSpinBox" name="wheelSpeed">
+        <property name="value">
+         <double>2.000000000000000</double>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="wheelRadiusLabel">
@@ -50,7 +54,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="wheelRadius"/>
+       <widget class="QDoubleSpinBox" name="wheelRadius">
+        <property name="value">
+         <double>2.000000000000000</double>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="wheelSeparationLabel">
@@ -60,7 +68,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="wheelSeparation"/>
+       <widget class="QDoubleSpinBox" name="wheelSeparation">
+        <property name="value">
+         <double>16.000000000000000</double>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="distanceToWheelsLabel">
@@ -70,7 +82,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QDoubleSpinBox" name="distanceToWheels"/>
+       <widget class="QDoubleSpinBox" name="distanceToWheels">
+        <property name="value">
+         <double>3.000000000000000</double>
+        </property>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="RobotSizeLabelHorizontalLayout">
@@ -99,10 +115,18 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QDoubleSpinBox" name="robotHigh"/>
+         <widget class="QDoubleSpinBox" name="robotHigh">
+          <property name="value">
+           <double>22.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="robotWidth"/>
+         <widget class="QDoubleSpinBox" name="robotWidth">
+          <property name="value">
+           <double>16.000000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -139,7 +163,11 @@
          <widget class="QDoubleSpinBox" name="sensorDistance"/>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="sensorSeparation"/>
+         <widget class="QDoubleSpinBox" name="sensorSeparation">
+          <property name="value">
+           <double>4.000000000000000</double>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -181,6 +209,12 @@
           <horstretch>0</horstretch>
           <verstretch>190</verstretch>
          </sizepolicy>
+        </property>
+        <property name="plainText">
+         <string>C:\GitHub\TFG\TFG-RobotSiguelineas\Circuitos\circuito.txt</string>
+        </property>
+        <property name="placeholderText">
+         <string/>
         </property>
        </widget>
       </item>
@@ -251,10 +285,16 @@
        <bool>true</bool>
       </property>
       <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>715</width>
+        <height>715</height>
+       </size>
       </property>
       <widget class="QLabel" name="robotPhoto">
        <property name="enabled">
@@ -262,10 +302,10 @@
        </property>
        <property name="geometry">
         <rect>
-         <x>450</x>
-         <y>10</y>
-         <width>401</width>
-         <height>501</height>
+         <x>320</x>
+         <y>-100</y>
+         <width>700</width>
+         <height>700</height>
         </rect>
        </property>
        <property name="text">

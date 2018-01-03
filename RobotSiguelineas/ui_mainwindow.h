@@ -96,6 +96,7 @@ public:
 
         wheelSpeed = new QDoubleSpinBox(centralWidget);
         wheelSpeed->setObjectName(QStringLiteral("wheelSpeed"));
+        wheelSpeed->setValue(2);
 
         verticalLayout->addWidget(wheelSpeed);
 
@@ -106,6 +107,7 @@ public:
 
         wheelRadius = new QDoubleSpinBox(centralWidget);
         wheelRadius->setObjectName(QStringLiteral("wheelRadius"));
+        wheelRadius->setValue(2);
 
         verticalLayout->addWidget(wheelRadius);
 
@@ -116,6 +118,7 @@ public:
 
         wheelSeparation = new QDoubleSpinBox(centralWidget);
         wheelSeparation->setObjectName(QStringLiteral("wheelSeparation"));
+        wheelSeparation->setValue(16);
 
         verticalLayout->addWidget(wheelSeparation);
 
@@ -126,6 +129,7 @@ public:
 
         distanceToWheels = new QDoubleSpinBox(centralWidget);
         distanceToWheels->setObjectName(QStringLiteral("distanceToWheels"));
+        distanceToWheels->setValue(3);
 
         verticalLayout->addWidget(distanceToWheels);
 
@@ -152,11 +156,13 @@ public:
         RobotSizeHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
         robotHigh = new QDoubleSpinBox(centralWidget);
         robotHigh->setObjectName(QStringLiteral("robotHigh"));
+        robotHigh->setValue(22);
 
         RobotSizeHorizontalLayout->addWidget(robotHigh);
 
         robotWidth = new QDoubleSpinBox(centralWidget);
         robotWidth->setObjectName(QStringLiteral("robotWidth"));
+        robotWidth->setValue(16);
 
         RobotSizeHorizontalLayout->addWidget(robotWidth);
 
@@ -191,6 +197,7 @@ public:
 
         sensorSeparation = new QDoubleSpinBox(centralWidget);
         sensorSeparation->setObjectName(QStringLiteral("sensorSeparation"));
+        sensorSeparation->setValue(4);
 
         SensorHorizontalLayout->addWidget(sensorSeparation);
 
@@ -269,15 +276,16 @@ public:
         widget = new GLWidget(centralWidget);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setEnabled(true);
-        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(widget->sizePolicy().hasHeightForWidth());
         widget->setSizePolicy(sizePolicy1);
+        widget->setMaximumSize(QSize(715, 715));
         robotPhoto = new QLabel(widget);
         robotPhoto->setObjectName(QStringLiteral("robotPhoto"));
         robotPhoto->setEnabled(true);
-        robotPhoto->setGeometry(QRect(450, 10, 401, 501));
+        robotPhoto->setGeometry(QRect(320, -100, 700, 700));
         robotPhoto->setPixmap(QPixmap(QString::fromUtf8("Robot.jpg")));
         robotPhoto->setScaledContents(false);
 
@@ -305,6 +313,8 @@ public:
         perspectiveRadioButton->setText(QApplication::translate("MainWindow", "Perspective", Q_NULLPTR));
         orthogonalRadioButton->setText(QApplication::translate("MainWindow", "Orthogonal", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
+        circuitePath->setPlainText(QApplication::translate("MainWindow", "C:\\GitHub\\TFG\\TFG-RobotSiguelineas\\Circuitos\\circuito.txt", Q_NULLPTR));
+        circuitePath->setPlaceholderText(QString());
         showRobotCheckBox->setText(QApplication::translate("MainWindow", "Show robot image", Q_NULLPTR));
         timeTittleLabel->setText(QApplication::translate("MainWindow", "Time", Q_NULLPTR));
         timeLabel->setText(QString());

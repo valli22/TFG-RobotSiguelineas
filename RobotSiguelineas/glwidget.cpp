@@ -104,6 +104,7 @@ void GLWidget::resizeGL(int w, int h){
 void GLWidget::drawCircuite()
 {
     glLineWidth(2.0f);
+    glColor3f(0.7f,0.0f,0.0f);
     glBegin(GL_LINE_STRIP);
         for(int i = 0; i<circuite.length();i++){
             glVertex3f(circuite.at(i).at(0),circuite.at(i).at(1),circuite.at(i).at(2));
@@ -115,21 +116,21 @@ void GLWidget:: drawRobot(){
     //Sensor derecho
     glPushMatrix();
         glTranslatef(rightSensorX,0,-sensorZ);
-        glColor3f(0.0f,0.0f,0.0f);
+        glColor3f(0.7f,0.0f,0.0f);
         glutSolidCube(0.5);
     glPopMatrix();
 
     //Sensor izquierdo
     glPushMatrix();
         glTranslatef(leftSensorX,0,-sensorZ);
-        glColor3f(0.0f,0.0f,0.0f);
+        glColor3f(0.0f,7.0f,0.0f);
         glutSolidCube(0.5);
     glPopMatrix();
 
     glPushMatrix();
         glTranslatef(0,0,((robotHigh/2)-distanceToWheels));
         glScalef(robotWidth,0.5,robotHigh);
-        glColor3f(0.0f,0.0f,0.0f);
+        glColor3f(0.0f,0.0f,7.0f);
         glutSolidCube(1.0f);
     glPopMatrix();
 
@@ -184,10 +185,6 @@ void GLWidget::setWheelPosition(GLdouble dToWheel){
 
 void GLWidget::setCircuite(QString circuite){
     QString path = circuite;
-
-    if(path==""){
-        path = "C:\\GitHub\\TFG\\TFG-RobotSiguelineas\\Circuitos\\circuito.txt";
-    }
 
     QFile file(path);
 
