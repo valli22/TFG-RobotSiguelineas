@@ -34,7 +34,7 @@ void GLWidget::paintGL(){
     glMatrixMode(GL_MODELVIEW);
 
     if(start){
-        totalTime+=dt;
+        totalTime+=dt*3.1;
         QString s = QString::number((int)totalTime);
         uiWindow->setTimer(s+"s");
         glLoadIdentity();
