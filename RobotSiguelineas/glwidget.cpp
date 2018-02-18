@@ -25,10 +25,45 @@ GLWidget::GLWidget(QWidget *parent):
 }
 
 void GLWidget::initializeGL(){
-    glClearColor(1,1,1,1);
+    glEnable(GL_DEPTH_TEST);
+    // Modelo de Iluminación
+        glEnable(GL_LIGHTING);
+
+     // Parámetros de la Luz ambiental global
+        GLfloat IA[]  = { 0.2f, 0.2f, 0.2f, 1.0f };
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT, IA);
+
+     // Parámetros de la Luz 0 (direccional=sol)
+        GLfloat Ia0[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+        GLfloat Id0[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+        GLfloat Is0[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+        glLightfv(GL_LIGHT0, GL_AMBIENT , Ia0);
+        glLightfv(GL_LIGHT0, GL_DIFFUSE , Id0);
+        glLightfv(GL_LIGHT0, GL_SPECULAR, Is0);
+        glEnable(GL_LIGHT0);
+
+     // Parámetros de la Luz 1 (posicional=bombilla)
+        GLfloat Ia1[] = { 0.1f, 0.1f, 0.1f, 1.0f };
+        GLfloat Id1[] = { 0.9f, 0.9f, 0.9f, 1.0f };
+        GLfloat Is1[] = { 0.8f, 0.8f, 0.8f, 1.0f };
+        glLightfv(GL_LIGHT1, GL_AMBIENT , Ia1);
+        glLightfv(GL_LIGHT1, GL_DIFFUSE , Id1);
+        glLightfv(GL_LIGHT1, GL_SPECULAR, Is1);
+        glLightf (GL_LIGHT1, GL_CONSTANT_ATTENUATION , 0.90f);
+        glLightf (GL_LIGHT1, GL_LINEAR_ATTENUATION   , 0.05f);
+        glLightf (GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.01f);
+        glEnable(GL_LIGHT1);
+
+     // Modelo de sombreado
+        glShadeModel(GL_SMOOTH);
+
+     // Normalizado de coordenadas normales
+        glEnable(GL_NORMALIZE);
+
 }
 
 void GLWidget::paintGL(){
+    glClearColor(1,1,1,1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
@@ -38,7 +73,7 @@ void GLWidget::paintGL(){
         QString s = QString::number((int)totalTime);
         uiWindow->setTimer(s+"s");
         glLoadIdentity();
-        glm::vec3 cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
+        glm::vec3 cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
         glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
         glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
 
@@ -86,10 +121,10 @@ void GLWidget::resizeGL(int w, int h){
     if(start){
         GLdouble aspect = w / h;
         const GLdouble zNear = 1.0;
-        const GLdouble zFar = 200.0;
+        const GLdouble zFar = 500.0;
 
         if(isPerspective){
-            projection = glm::perspective(fov*(M_PI/180),aspect,zNear,zFar);
+            projection = glm::perspective(fov*(M_PI/180)/1.5,aspect,zNear,zFar);
         }else{
             //projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
             //projection = glm::ortho((double)-h*aspect,(double)h*aspect,(double)-h,(double)h,(double)zNear,(double)zFar);
@@ -121,6 +156,7 @@ void GLWidget:: drawRobot(){
 
     // Dibujo del robot
        glRotatef(-90.0f,1.0f,0.0f,0.0f); // Como está diseñado en vertical, aquí lo pongo en horizontal
+
        drawCuerpo();
        drawRuedasDelanteras();
        drawRuedaTrasera();
@@ -158,11 +194,20 @@ void GLWidget:: drawCuerpo() {
 
  // Plataforma
     glPushMatrix();
+    // Aspa (red plastic)
+        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Kd[] = { 0.5f, 0.0f, 0.0f, 1.0f };
+        GLfloat Ks[] = { 0.7f, 0.6f, 0.6f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+        glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+        glMaterialf (GL_FRONT, GL_SHININESS, 32.0f);
+
      // Redimensionamos el cubo para convertirlo en la plataforma
         glTranslatef(0.0f,-(robotHigh/2.0f-distanceToWheels),0.0f);
         glScalef(robotWidth,robotHigh,1.0f);
      // Modelo solido/alambre de un cubo de lado 2
-        glColor3f(0.0f,0.0f,1.0f);
+        //glColor3f(0.0f,0.0f,1.0f);
         glutWireCube (1.0f);
         glColor3f(1.0f,1.0f,0.0f);
         glutSolidCube(1.0f);
