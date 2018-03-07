@@ -80,6 +80,10 @@ private:
 
     //Posicion de la camara que se posicionara segun la posicion del circuito
     QList<float> cameraPosCircuite;
+    float cameraTopPos;
+
+    GLfloat newX = 0.0f;
+    GLfloat newY = 0.0f;
 
     //Lista de puntos que conforman el circuito
     QList< QList<float> > circuite;
@@ -112,6 +116,7 @@ private:
     void drawSensores();
     void drawRuedaDelantera();
     void drawSensor();
+    void funMotion(int x, int y);
 };
 
 #endif // GLWIDGET_H

@@ -73,7 +73,11 @@ void GLWidget::paintGL(){
         QString s = QString::number((int)totalTime);
         uiWindow->setTimer(s+"s");
         glLoadIdentity();
-        glm::vec3 cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
+        glm::vec3 cameraPos;
+        if(isPerspective)
+            cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
+        else
+            cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
         glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
         glm::vec3 up = glm::vec3(0.0f,0.0f,-1.0f);
 
@@ -82,6 +86,8 @@ void GLWidget::paintGL(){
         const float *viewM = (const float*)glm::value_ptr(view);
 
         glLoadMatrixf(viewM);
+
+        //glutMotionFunc(()funMotion);
 
         drawCircuite();
 
@@ -112,6 +118,18 @@ void GLWidget::paintGL(){
     //update();
 }
 
+void GLWidget::funMotion(int x, int y){
+    newX = 250.0f - (GLfloat)x;
+    newY = (GLfloat)y - 250.0f;
+    if(newX> 250.0f) newX =  250.0f;
+    if(newY> 250.0f) newY =  250.0f;
+    if(newX<-250.0f) newX = -250.0f;
+    if(newY<-250.0f) newY = -250.0f;
+    newX /= 5.0f;
+    newY /= 5.0f;
+    glutPostRedisplay();
+}
+
 void GLWidget::resizeGL(int w, int h){
     glViewport(0,0,w,h);
 
@@ -128,7 +146,9 @@ void GLWidget::resizeGL(int w, int h){
         }else{
             //projection = glm::ortho((double)(-w/80)*aspect,(double)(w/80)*aspect,(double)(-h/80)*aspect,(double)(h/80)*aspect,zNear,zFar);
             //projection = glm::ortho((double)-h*aspect,(double)h*aspect,(double)-h,(double)h,(double)zNear,(double)zFar);
-            projection = glm::ortho((-zFar/2)*w/h,(zFar/2)*w/h,-zFar/2,zFar/2,zNear,zFar);
+            //projection = glm::ortho((-zFar/2)*w/h,(zFar/2)*w/h,-zFar/2,zFar/2,zNear,zFar);
+            projection = glm::ortho((-zFar/4)*w/h,(zFar/4)*w/h,(-zFar/4)*w/h,(zFar/4)*w/h,zNear,zFar);
+            //projection = glm::ortho(-200.0,300.0,-200.0,300.0,zNear,zFar);
         }
         const float *projectionM = (const float*)glm::value_ptr(projection);
 
@@ -156,7 +176,7 @@ void GLWidget:: drawRobot(){
 
     // Dibujo del robot
        glRotatef(-90.0f,1.0f,0.0f,0.0f); // Como está diseñado en vertical, aquí lo pongo en horizontal
-
+       glTranslatef(0,0,wheelRadius+0.5);
        drawCuerpo();
        drawRuedasDelanteras();
        drawRuedaTrasera();
@@ -195,9 +215,9 @@ void GLWidget:: drawCuerpo() {
  // Plataforma
     glPushMatrix();
     // Aspa (red plastic)
-        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-        GLfloat Kd[] = { 0.5f, 0.0f, 0.0f, 1.0f };
-        GLfloat Ks[] = { 0.7f, 0.6f, 0.6f, 1.0f };
+        GLfloat Ka[] = { 0.3f, 1.0f, 0.3f, 1.0f };
+        GLfloat Kd[] = { 0.3f, 1.0f, 0.3f, 1.0f };
+        GLfloat Ks[] = { 0.3f, 1.0f, 0.3f, 1.0f };
         glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
         glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
         glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
@@ -222,6 +242,13 @@ void GLWidget:: drawRuedasDelanteras() {
     //GLfloat distRueda = distanceToWheels/2.0f + 1.0f;
     GLfloat distRueda = wheelSeparation/2.0f;
     glPushMatrix();
+        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Kd[] = { 0.5f, 0.5f, 0.0f, 1.0f };
+        GLfloat Ks[] = { 0.7f, 0.6f, 0.6f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+        glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+        glMaterialf (GL_FRONT, GL_SHININESS, 32.0f);
         glPushMatrix();
             glTranslatef(-distRueda,0.0f,0.0f);
             drawRuedaDelantera();
@@ -237,7 +264,6 @@ void GLWidget:: drawRuedasDelanteras() {
 void GLWidget:: drawRuedaDelantera() {
 
     glPushMatrix();
-        //glRotatef(rotX,1.0f,0.0f,0.0f);  // Para que de la sensación de que los radios giran (se puede quitar)
         glRotatef(90.0f,0.0f,1.0f,0.0f); // Orientamos la rueda
      // Redimensionamos la esfera para convertirla en la rueda
         glScalef(1.0f,1.0f,1.0f/wheelRadius);
@@ -262,7 +288,6 @@ void GLWidget:: drawRuedaTrasera() {
         glColor3f(0.5f,0.5f,0.5f);
         glutSolidCylinder(0.2f,wheelRadius,10,5);
      // Modelo solido/alambre de la frueda
-        //glRotatef(rotX,1.0f,0.0f,0.0f); // Sensación de giro de los radios (se puede quitar)
         glRotatef(90.0f,0.0f,1.0f,0.0f);
         glScalef(1.0f, 1.0f, 0.5f);
         glColor3f(0.5f, 0.0f, 0.0f);
@@ -279,6 +304,13 @@ void GLWidget:: drawSensores() {
  // Colocamos los sensores en su sitio
     GLfloat distSensor = sensorSeparation/2.0f;
     glPushMatrix();
+        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Kd[] = { 0.0f, 0.7f, 1.0f, 1.0f };
+        GLfloat Ks[] = { 0.7f, 0.6f, 0.6f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+        glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+        glMaterialf (GL_FRONT, GL_SHININESS, 32.0f);
         glPushMatrix();
             glTranslatef(-distSensor,distanceToWheels+sensorDistance,-(wheelRadius-0.5f));
             drawSensor();
@@ -406,6 +438,7 @@ void GLWidget::setCircuite(QString circuite){
     //cameraPosCircuite<<(((high/2)*qSin((90-(fov/2))*M_PI/180))/qSin((fov/2)*M_PI/180));
 
     cameraPosCircuite<<(bottom+top)/2;
+    cameraTopPos = (bottom+top)/2;
 
     /*
      * para comprobar que los sensores estan bien colocados
