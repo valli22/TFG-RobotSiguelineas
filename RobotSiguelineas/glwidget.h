@@ -73,7 +73,7 @@ private:
     bool start;
 
     //FOV de la camara
-    const GLdouble fov = 75.0;
+    GLdouble fov = 75.0;
 
     //Tipo de camara
     bool isPerspective;
@@ -84,6 +84,7 @@ private:
 
     GLfloat newX = 0.0f;
     GLfloat newY = 0.0f;
+    GLfloat newZ = 0.0f;
 
     //Lista de puntos que conforman el circuito
     QList< QList<float> > circuite;
@@ -104,6 +105,9 @@ private:
     int sleepValue;
     MainWindow *uiWindow;
 
+    //Viewport
+    float w,h;
+
     QTimer timer;
 
     //void keyPressEvent(QKeyEvent *event);
@@ -116,7 +120,8 @@ private:
     void drawSensores();
     void drawRuedaDelantera();
     void drawSensor();
-    void funMotion(int x, int y);
+    void mouseMoveEvent(QMouseEvent *event);
+    void wheelEvent(QWheelEvent *event);
 };
 
 #endif // GLWIDGET_H

@@ -75,7 +75,8 @@ void GLWidget::paintGL(){
         glLoadIdentity();
         glm::vec3 cameraPos;
         if(isPerspective)
-            cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
+            //cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
+            cameraPos = glm::vec3(4.0*qSin(newX*M_PI/180),4.0*newY,4.0*qSin(newZ*M_PI/180));
         else
             cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
         glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
@@ -86,8 +87,6 @@ void GLWidget::paintGL(){
         const float *viewM = (const float*)glm::value_ptr(view);
 
         glLoadMatrixf(viewM);
-
-        //glutMotionFunc(()funMotion);
 
         drawCircuite();
 
@@ -118,21 +117,31 @@ void GLWidget::paintGL(){
     //update();
 }
 
-void GLWidget::funMotion(int x, int y){
-    newX = 250.0f - (GLfloat)x;
-    newY = (GLfloat)y - 250.0f;
-    if(newX> 250.0f) newX =  250.0f;
-    if(newY> 250.0f) newY =  250.0f;
-    if(newX<-250.0f) newX = -250.0f;
-    if(newY<-250.0f) newY = -250.0f;
-    newX /= 5.0f;
-    newY /= 5.0f;
-    glutPostRedisplay();
+void GLWidget::mouseMoveEvent(QMouseEvent *event){
+    if(isPerspective){
+        newX = w - (GLfloat) event->x();
+        newY = (GLfloat) event->y() - h;
+        if(newX> w) newX =  w;
+        if(newY> h) newY =  h;
+        if(newX<-w) newX = -w;
+        if(newY<-h) newY = -h;
+        newX /= 5.0f;
+        newY /= 5.0f;
+    }
+}
+
+void GLWidget::wheelEvent(QWheelEvent *event){
+    if(isPerspective){
+        fov -= event->delta()/50;
+        this->resize(this->width()+1,this->height()+1);
+        this->resize(this->width()-1,this->height()-1);
+    }
 }
 
 void GLWidget::resizeGL(int w, int h){
     glViewport(0,0,w,h);
-
+    this->w = w;
+    this->h = h;
     glMatrixMode(GL_PROJECTION);
 
     glLoadIdentity();
@@ -439,6 +448,9 @@ void GLWidget::setCircuite(QString circuite){
 
     cameraPosCircuite<<(bottom+top)/2;
     cameraTopPos = (bottom+top)/2;
+    newX = cameraPosCircuite.at(0);
+    newY = cameraPosCircuite.at(1);
+    newZ = cameraPosCircuite.at(2);
 
     /*
      * para comprobar que los sensores estan bien colocados
