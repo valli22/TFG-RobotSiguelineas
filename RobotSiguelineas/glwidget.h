@@ -108,6 +108,9 @@ private:
     //Viewport
     float w,h;
 
+    //Radio sobre el que se mueve la camara
+    GLfloat cameraRadius;
+
     QTimer timer;
 
     //void keyPressEvent(QKeyEvent *event);

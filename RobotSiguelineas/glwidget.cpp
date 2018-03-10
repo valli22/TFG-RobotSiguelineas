@@ -17,7 +17,7 @@ GLWidget::GLWidget(QWidget *parent):
     totalTime = 0.0f;
     sleepValue = 20;
     dt = 0.01;
-
+    cameraRadius = 3.0;
     threshold = 0.3;
 
     connect(&timer, SIGNAL(timeout()),this,SLOT(update()));
@@ -76,7 +76,9 @@ void GLWidget::paintGL(){
         glm::vec3 cameraPos;
         if(isPerspective)
             //cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(1));
-            cameraPos = glm::vec3(4.0*qSin(newX*M_PI/180),4.0*newY,4.0*qSin(newZ*M_PI/180));
+            cameraPos = glm::vec3(cameraRadius*qCos(newY*M_PI/180)*qSin(newX*M_PI/180),
+                                  cameraRadius*qSin(newY*M_PI/180),
+                                  cameraRadius*qCos(newY*M_PI/180)*qCos(newX*M_PI/180));
         else
             cameraPos = glm::vec3(cameraPosCircuite.at(0),cameraPosCircuite.at(1),cameraPosCircuite.at(2));
         glm::vec3 cameraDir = glm::vec3(cameraPosCircuite.at(0),0.0f,cameraPosCircuite.at(2));
