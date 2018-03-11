@@ -35,6 +35,9 @@ private:
     //Angulo que tenia el robot en el instante anterior (t-1)
     GLfloat rot;
 
+    QList<GLfloat> robotRecX;
+    QList<GLfloat> robotRecZ;
+
     //Velocidad rueda izquierda
     GLfloat leftWheel;
     //Velocidad rueda derecha
@@ -125,6 +128,7 @@ private:
     void drawSensor();
     void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
+    void drawRobotRec();
 };
 
 #endif // GLWIDGET_H

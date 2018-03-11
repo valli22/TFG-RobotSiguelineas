@@ -94,9 +94,13 @@ void GLWidget::paintGL(){
 
         movementController();
 
+        robotRecX<<x;
+        robotRecZ<<z;
+
         x -= (rightWheel + leftWheel) * (wheelRadius * qSin(rot)/2) * dt;
         z -= (rightWheel + leftWheel) * (wheelRadius * qCos(rot)/2) * dt;
         rot += (rightWheel - leftWheel)* (wheelRadius/wheelSeparation) * dt;
+
 
         model = glm::translate(glm::mat4(1.0),glm::vec3(x,0.0f,z));
         model = glm::rotate(model,(float)(rot),glm::vec3(0.0f,1.0f,0.0f));
@@ -111,6 +115,8 @@ void GLWidget::paintGL(){
             glMultMatrixf(modelM);
             drawRobot();
         glPopMatrix();
+
+        drawRobotRec();
 
         rightWheel = wheelSpeed;
         leftWheel = wheelSpeed;
@@ -170,13 +176,39 @@ void GLWidget::resizeGL(int w, int h){
 
 void GLWidget::drawCircuite()
 {
-    glLineWidth(2.0f);
-    glColor3f(0.7f,0.0f,0.0f);
-    glBegin(GL_LINE_STRIP);
-        for(int i = 0; i<circuite.length();i++){
-            glVertex3f(circuite.at(i).at(0),circuite.at(i).at(1),circuite.at(i).at(2));
-        }
-    glEnd();
+    glPushMatrix();
+        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Kd[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Ks[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+        glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+        glMaterialf (GL_FRONT, GL_SHININESS, 32.0f);
+        glLineWidth(2.0f);
+        glBegin(GL_LINE_STRIP);
+            for(int i = 0; i<circuite.length();i++){
+                glVertex3f(circuite.at(i).at(0),circuite.at(i).at(1),circuite.at(i).at(2));
+            }
+        glEnd();
+    glPopMatrix();
+}
+
+void GLWidget::drawRobotRec(){
+    glPushMatrix();
+        GLfloat Ka[] = { 255.0f, 1.0f, 1.0f, 1.0f };
+        GLfloat Kd[] = { 255.0f, 1.0f, 1.0f, 1.0f };
+        GLfloat Ks[] = { 255.0f, 1.0f, 1.0f, 1.0f };
+        glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
+        glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
+        glMaterialf (GL_FRONT, GL_SHININESS, 32.0f);
+        glLineWidth(2.5);
+        glBegin(GL_LINE_STRIP);
+            for(int i = 0; i<robotRecX.length();i++){
+                glVertex3f(robotRecX.at(i),0,robotRecZ.at(i));
+            }
+        glEnd();
+    glPopMatrix();
 }
 
 void GLWidget:: drawRobot(){
@@ -226,9 +258,9 @@ void GLWidget:: drawCuerpo() {
  // Plataforma
     glPushMatrix();
     // Aspa (red plastic)
-        GLfloat Ka[] = { 0.3f, 1.0f, 0.3f, 1.0f };
-        GLfloat Kd[] = { 0.3f, 1.0f, 0.3f, 1.0f };
-        GLfloat Ks[] = { 0.3f, 1.0f, 0.3f, 1.0f };
+        GLfloat Ka[] = { 1.0f, 255.0f, 1.0f, 1.0f };
+        GLfloat Kd[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Ks[] = { 0.0f, 0.0f, 0.0f, 1.0f };
         glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
         glMaterialfv(GL_FRONT, GL_DIFFUSE  , Kd);
         glMaterialfv(GL_FRONT, GL_SPECULAR , Ks);
@@ -253,7 +285,7 @@ void GLWidget:: drawRuedasDelanteras() {
     //GLfloat distRueda = distanceToWheels/2.0f + 1.0f;
     GLfloat distRueda = wheelSeparation/2.0f;
     glPushMatrix();
-        GLfloat Ka[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+        GLfloat Ka[] = { 0.7f, 0.6f, 0.6f, 1.0f };
         GLfloat Kd[] = { 0.5f, 0.5f, 0.0f, 1.0f };
         GLfloat Ks[] = { 0.7f, 0.6f, 0.6f, 1.0f };
         glMaterialfv(GL_FRONT, GL_AMBIENT  , Ka);
@@ -474,6 +506,8 @@ void GLWidget::startRace(MainWindow *mWindow){
     rightSensorVector = glm::vec4 (rightSensorX,0,-sensorZ,1);
     leftSensorPos = leftSensorVector;
     rightSensorPos = rightSensorVector;
+    robotRecX.clear();
+    robotRecZ.clear();
     totalTime = 0;
     uiWindow = mWindow;
     start= true;
