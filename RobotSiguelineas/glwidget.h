@@ -73,10 +73,15 @@ private:
     glm::vec4 leftSensorPos;
     glm::vec4 rightSensorPos;
 
+
     bool start;
+
+    //Valor que determina el "Zoom" en perspectiva
+    GLfloat scaleZoom = 1.0f;
 
     //FOV de la camara
     GLdouble fov = 75.0;
+    GLdouble initialFov;
 
     //Tipo de camara
     bool isPerspective;
@@ -84,10 +89,6 @@ private:
     //Posicion de la camara que se posicionara segun la posicion del circuito
     QList<float> cameraPosCircuite;
     float cameraTopPos;
-
-    GLfloat newX = 0.0f;
-    GLfloat newY = 0.0f;
-    GLfloat newZ = 0.0f;
 
     //Lista de puntos que conforman el circuito
     QList< QList<float> > circuite;
@@ -108,12 +109,6 @@ private:
     int sleepValue;
     MainWindow *uiWindow;
 
-    //Viewport
-    float w,h;
-
-    //Radio sobre el que se mueve la camara
-    GLfloat cameraRadius;
-
     QTimer timer;
 
     //void keyPressEvent(QKeyEvent *event);
@@ -126,7 +121,7 @@ private:
     void drawSensores();
     void drawRuedaDelantera();
     void drawSensor();
-    void mouseMoveEvent(QMouseEvent *event);
+    //void mouseMoveEvent(QMouseEvent *event);
     void wheelEvent(QWheelEvent *event);
     void drawRobotRec();
 };
