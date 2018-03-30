@@ -297,25 +297,19 @@
        </size>
       </property>
       <widget class="QLabel" name="robotPhoto">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
        <property name="geometry">
         <rect>
-         <x>320</x>
-         <y>-100</y>
-         <width>700</width>
-         <height>700</height>
+         <x>310</x>
+         <y>0</y>
+         <width>411</width>
+         <height>521</height>
         </rect>
        </property>
        <property name="text">
         <string/>
        </property>
        <property name="pixmap">
-        <pixmap>Robot.jpg</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
+        <pixmap resource="images.qrc">:/Robot.jpg</pixmap>
        </property>
       </widget>
      </widget>
@@ -332,7 +326,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>quit</sender>

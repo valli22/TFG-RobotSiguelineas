@@ -36,4 +36,4 @@ LIBS += -lOpengl32
 LIBS += libfreeglut
 
 RESOURCES += \
-    rscimages.qrc
+    images.qrc

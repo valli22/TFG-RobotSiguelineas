@@ -284,10 +284,8 @@ public:
         widget->setMaximumSize(QSize(715, 715));
         robotPhoto = new QLabel(widget);
         robotPhoto->setObjectName(QStringLiteral("robotPhoto"));
-        robotPhoto->setEnabled(true);
-        robotPhoto->setGeometry(QRect(320, -100, 700, 700));
-        robotPhoto->setPixmap(QPixmap(QString::fromUtf8("Robot.jpg")));
-        robotPhoto->setScaledContents(false);
+        robotPhoto->setGeometry(QRect(310, 0, 411, 521));
+        robotPhoto->setPixmap(QPixmap(QString::fromUtf8(":/Robot.jpg")));
 
         gridLayout->addWidget(widget, 0, 0, 1, 1);
 
