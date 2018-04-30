@@ -448,6 +448,8 @@ void GLWidget::setCircuite(QString circuite){
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         return;
 
+    this->circuite.clear();
+
     while(!file.atEnd()){
         QList<float> vertex;
         QString line = file.readLine();
@@ -475,6 +477,7 @@ void GLWidget::setCircuite(QString circuite){
             top = this->circuite.at(i).at(2);
     }
 
+    cameraPosCircuite.clear();
     cameraPosCircuite<<(left+right)/2;
 
     if(right-left > top-bottom){
