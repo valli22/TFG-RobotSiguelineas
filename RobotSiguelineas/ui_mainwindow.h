@@ -284,12 +284,14 @@ public:
         widget->setMaximumSize(QSize(715, 715));
         robotPhoto = new QLabel(widget);
         robotPhoto->setObjectName(QStringLiteral("robotPhoto"));
-        robotPhoto->setGeometry(QRect(310, 0, 411, 521));
+        robotPhoto->setGeometry(QRect(140, 110, 411, 521));
         robotPhoto->setPixmap(QPixmap(QString::fromUtf8(":/Robot.jpg")));
 
         gridLayout->addWidget(widget, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
+#ifndef QT_NO_SHORTCUT
+#endif // QT_NO_SHORTCUT
 
         retranslateUi(MainWindow);
         QObject::connect(quit, SIGNAL(clicked()), MainWindow, SLOT(close()));
@@ -315,7 +317,7 @@ public:
         circuitePath->setPlaceholderText(QString());
         showRobotCheckBox->setText(QApplication::translate("MainWindow", "Show robot image", Q_NULLPTR));
         timeTittleLabel->setText(QApplication::translate("MainWindow", "Time", Q_NULLPTR));
-        timeLabel->setText(QString());
+        timeLabel->setText(QApplication::translate("MainWindow", "0s", Q_NULLPTR));
         insertParameters->setText(QApplication::translate("MainWindow", "Insert Parameters", Q_NULLPTR));
         quit->setText(QApplication::translate("MainWindow", "&Quit", Q_NULLPTR));
         robotPhoto->setText(QString());
