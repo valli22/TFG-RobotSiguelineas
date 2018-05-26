@@ -302,14 +302,14 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Robot Siguelineas", Q_NULLPTR));
-        wheelSpeedLabel->setText(QApplication::translate("MainWindow", "Wheel speed", Q_NULLPTR));
-        wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius - WR", Q_NULLPTR));
-        wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation - WS", Q_NULLPTR));
-        distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels - WD", Q_NULLPTR));
-        robotHighLabel->setText(QApplication::translate("MainWindow", "Robot high - L", Q_NULLPTR));
-        robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width - A", Q_NULLPTR));
-        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance - SD", Q_NULLPTR));
-        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation - SS", Q_NULLPTR));
+        wheelSpeedLabel->setText(QApplication::translate("MainWindow", "Motor speed (rps) - MS", Q_NULLPTR));
+        wheelRadiusLabel->setText(QApplication::translate("MainWindow", "Wheel radius (cm) - WR", Q_NULLPTR));
+        wheelSeparationLabel->setText(QApplication::translate("MainWindow", "Wheel separation (cm) - WS", Q_NULLPTR));
+        distanceToWheelsLabel->setText(QApplication::translate("MainWindow", "Distance to wheels (cm) - WD", Q_NULLPTR));
+        robotHighLabel->setText(QApplication::translate("MainWindow", "Robot lenght (cm) - RL", Q_NULLPTR));
+        robotWidthLabel->setText(QApplication::translate("MainWindow", "Robot width (cm) - RW", Q_NULLPTR));
+        sensorDistanceLabel->setText(QApplication::translate("MainWindow", "Sensor distance (cm) - SD", Q_NULLPTR));
+        sensorSeparationLabel->setText(QApplication::translate("MainWindow", "Sensor separation (cm) - SS", Q_NULLPTR));
         perspectiveRadioButton->setText(QApplication::translate("MainWindow", "Perspective", Q_NULLPTR));
         orthogonalRadioButton->setText(QApplication::translate("MainWindow", "Orthogonal", Q_NULLPTR));
         circuitePathLabel->setText(QApplication::translate("MainWindow", "Circuite path", Q_NULLPTR));
