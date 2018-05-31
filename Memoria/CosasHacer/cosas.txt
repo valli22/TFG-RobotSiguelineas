@@ -1,0 +1,30 @@
+1º
+
+En casos de uso:
+Caso de uso
+Que es lo que se va a hacer
+Figuras izq-der
+Tablas (meter un parametro mas para el tiempo)
+Porque el resultado
+
+Añadir referencias dentro memoria
+Numero de figuras y ecuaciones
+ajustar espacios en blancos
+
+2º
+Caracteristicas del ordenador en el que se ejecuta (procesador, ram y so) al final de lo de las instancias
+velocidad ruedas como instancias
+tabla de instancias
+los experimentos que vamos a hacer
+Dejar busqueda local 6 y hacer cambios en delta(ahora mismo 0.1 cambiar y que pueda ser 0.05,0.1,0.15,0.2)
+CONSTRUCTIVOS
+lo que vas a hacer y luego comentarlo
+Tiempo de ese robot sin algoritmo directamente
+Ejecutar y poner resultados (Instancias en linea y ejecucion (10) en vertical, promediar abajo)
+BUSQUEDAS LOCALES
+			Instancia 1 				Instancia 2 etc
+busqueda local 1	Promedio de ejecucion de 10 veces
+busqueda local 2
+
+Una vez que me quedo con el mejor, vuelvo a ejecutar y me quedo con los parametros geometricos.
+las busquedas locales son 8, mezcla de best/first y delta (0.1,0.05,etc)
