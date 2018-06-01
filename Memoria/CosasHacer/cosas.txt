@@ -1,14 +1,5 @@
 1º
 
-En casos de uso:
-Caso de uso
-Que es lo que se va a hacer
-Figuras izq-der
-Tablas (meter un parametro mas para el tiempo)
-Porque el resultado
-
-Añadir referencias dentro memoria
-Numero de figuras y ecuaciones
 ajustar espacios en blancos
 
 2º
