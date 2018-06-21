@@ -192,6 +192,8 @@ public:
         SensorHorizontalLayout->setContentsMargins(-1, -1, -1, 0);
         sensorDistance = new QDoubleSpinBox(centralWidget);
         sensorDistance->setObjectName(QStringLiteral("sensorDistance"));
+        sensorDistance->setMinimum(-99);
+        sensorDistance->setValue(0);
 
         SensorHorizontalLayout->addWidget(sensorDistance);
 

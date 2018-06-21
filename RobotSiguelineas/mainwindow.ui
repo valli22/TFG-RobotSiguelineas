@@ -160,7 +160,14 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QDoubleSpinBox" name="sensorDistance"/>
+         <widget class="QDoubleSpinBox" name="sensorDistance">
+          <property name="minimum">
+           <double>-99.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.000000000000000</double>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="sensorSeparation">
